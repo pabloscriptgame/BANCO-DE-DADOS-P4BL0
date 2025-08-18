@@ -1,0 +1,60 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: #f7f7f7;
+}
+header {
+  background: #111;
+  color: white;
+  padding: 20px;
+}
+header h1 {
+  margin: 0;
+}
+.btn-whatsapp {
+  display: inline-block;
+  margin-top: 10px;
+  background: #25d366;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+main {
+  padding: 20px;
+}
+section {
+  margin: 30px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+#logoCanvas {
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+#logoGallery img {
+  max-width: 150px;
+  margin: 10px;
+}
+form input, form textarea {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+}
+form button {
+  background: #111;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+footer {
+  background: #111;
+  color: white;
+  padding: 15px;
+}
