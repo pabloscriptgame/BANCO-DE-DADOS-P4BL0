@@ -1,60 +1,1068 @@
+/* style.css - Tema Natalino: Vermelhos com toques de verde, árvores, neve e luzes. Responsivo para mobile. Sem emojis em desenhos, usa CSS/SVG para elementos reais. */
+
+:root {
+    --primary-red: #DC143C;
+    /* Vermelho natalino */
+    --accent-green: #228B22;
+    /* Verde árvore */
+    --accent-gold: #FFD700;
+    /* Ouro para luzes */
+    --white-snow: #FFFFFF;
+    --dark-bg: #000000;
+    --light-text: #FFFFFF;
+    --medium-text: #F0F8FF;
+    --success-green: #32CD32;
+    --muted: #D3D3D3;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  background: #f7f7f7;
+    font-family: 'Fredoka', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--primary-red), #FF0000, var(--accent-green), #006400, var(--primary-red));
+    background-size: 400% 400%;
+    animation: christmasShift 20s ease infinite;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--light-text);
+    line-height: 1.6;
+    font-size: 18px;
+    position: relative;
+    overflow-x: hidden;
 }
+
+@keyframes christmasShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* Neve caindo */
+
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.snowflake {
+    position: absolute;
+    color: var(--white-snow);
+    font-size: 20px;
+    animation: snowfall linear infinite;
+}
+
+.snowflake:nth-child(1) {
+    left: 10%;
+    animation-duration: 10s;
+}
+
+.snowflake:nth-child(2) {
+    left: 20%;
+    animation-duration: 15s;
+    animation-delay: 2s;
+}
+
+.snowflake:nth-child(3) {
+    left: 30%;
+    animation-duration: 12s;
+    animation-delay: 4s;
+}
+
+.snowflake:nth-child(4) {
+    left: 40%;
+    animation-duration: 18s;
+    animation-delay: 1s;
+}
+
+.snowflake:nth-child(5) {
+    left: 50%;
+    animation-duration: 14s;
+    animation-delay: 3s;
+}
+
+.snowflake:nth-child(6) {
+    left: 60%;
+    animation-duration: 16s;
+    animation-delay: 5s;
+}
+
+.snowflake:nth-child(7) {
+    left: 70%;
+    animation-duration: 11s;
+    animation-delay: 0.5s;
+}
+
+.snowflake:nth-child(8) {
+    left: 80%;
+    animation-duration: 13s;
+    animation-delay: 2.5s;
+}
+
+.snowflake:nth-child(9) {
+    left: 90%;
+    animation-duration: 17s;
+    animation-delay: 4.5s;
+}
+
+.snowflake:nth-child(10) {
+    left: 5%;
+    animation-duration: 9s;
+    animation-delay: 1.5s;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Luzes de Natal piscando */
+
+.christmas-lights {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.light {
+    position: absolute;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-gold);
+    animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+.light:nth-child(odd) {
+    animation-delay: 0s;
+    background: #FF4500;
+}
+
+.light:nth-child(even) {
+    animation-delay: 1s;
+    background: var(--accent-green);
+}
+
+.light:nth-child(1) {
+    top: 10%;
+    left: 10%;
+    width: 10px;
+    height: 10px;
+}
+
+.light:nth-child(2) {
+    top: 20%;
+    left: 90%;
+    width: 8px;
+    height: 8px;
+}
+
+.light:nth-child(3) {
+    top: 40%;
+    left: 20%;
+    width: 12px;
+    height: 12px;
+}
+
+.light:nth-child(4) {
+    top: 60%;
+    left: 70%;
+    width: 10px;
+    height: 10px;
+}
+
+.light:nth-child(5) {
+    top: 80%;
+    left: 40%;
+    width: 8px;
+    height: 8px;
+}
+
+.light:nth-child(6) {
+    top: 15%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+}
+
+.light:nth-child(7) {
+    top: 50%;
+    left: 80%;
+    width: 10px;
+    height: 10px;
+}
+
+.light:nth-child(8) {
+    top: 70%;
+    left: 10%;
+    width: 8px;
+    height: 8px;
+}
+
+.light:nth-child(9) {
+    top: 30%;
+    left: 60%;
+    width: 12px;
+    height: 12px;
+}
+
+.light:nth-child(10) {
+    top: 90%;
+    left: 30%;
+    width: 10px;
+    height: 10px;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+/* Árvore de Natal SVG estilizada */
+
+.christmas-tree {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+    opacity: 0.8;
+    animation: sway 3s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+    0% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(2deg);
+    }
+}
+
 header {
-  background: #111;
-  color: white;
-  padding: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 5px 20px;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5), 0 0 10px var(--primary-red);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-bottom: 1px solid var(--primary-red);
 }
-header h1 {
-  margin: 0;
+
+header:hover {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--primary-red);
+    transform: translateY(-1px);
 }
-.btn-whatsapp {
-  display: inline-block;
-  margin-top: 10px;
-  background: #25d366;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    position: relative;
 }
-main {
-  padding: 20px;
+
+.logo-link {
+    display: block;
+    text-decoration: none;
 }
-section {
-  margin: 30px 0;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--light-text);
+    font-family: 'Baloo 2', cursive;
 }
-#logoCanvas {
-  border: 1px solid #ccc;
-  margin-top: 10px;
+
+.logo-image {
+    height: 40px;
+    width: auto;
 }
-#logoGallery img {
-  max-width: 150px;
-  margin: 10px;
+
+.logo p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--accent-green);
 }
-form input, form textarea {
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
 }
-form button {
-  background: #111;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+
+.main-nav a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-family: 'Baloo 2', cursive;
 }
+
+.main-nav a:hover {
+    color: var(--accent-gold);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--light-text);
+}
+
+.hero-banner {
+    text-align: center;
+    padding: 80px 40px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 2px solid var(--primary-red);
+    border-radius: 10px;
+}
+
+.banner-content h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--primary-red);
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 0 0 10px var(--accent-gold);
+}
+
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--accent-green);
+}
+
+.marquee-text {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+    font-size: 20px;
+    color: var(--light-text);
+    padding-left: 100%;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-red), var(--accent-green));
+    color: var(--light-text);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    transition: transform 0.3s;
+    box-shadow: 0 0 15px var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+}
+
+.menu-section {
+    padding: 60px 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 2px solid var(--accent-gold);
+    border-bottom: 2px solid var(--accent-gold);
+}
+
+.menu-section h2 {
+    text-align: center;
+    font-size: 36px;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 0 0 10px var(--accent-gold);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--light-text);
+    border: 2px solid var(--accent-green);
+    padding: 15px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s;
+    font-family: 'Baloo 2', cursive;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    background: var(--accent-green);
+    color: var(--dark-bg);
+    box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.tab-panel h3 {
+    text-align: center;
+    font-size: 28px;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 0 0 5px var(--accent-gold);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.item {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--primary-red);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(220, 20, 60, 0.5), 0 0 15px var(--accent-gold);
+}
+
+.item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--accent-green);
+}
+
+.item h3 {
+    color: var(--accent-green);
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Baloo 2', cursive;
+}
+
+.item p {
+    color: var(--medium-text);
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.item span {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--accent-gold);
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px var(--accent-gold);
+}
+
+.add-to-cart {
+    background: linear-gradient(135deg, var(--primary-red), var(--accent-green));
+    color: var(--light-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.3s;
+    box-shadow: 0 0 10px var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent-gold);
+}
+
+.parceiros-section {
+    padding: 60px 40px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.parceiros-section h2 {
+    font-size: 36px;
+    color: var(--primary-red);
+    margin-bottom: 40px;
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 0 0 10px var(--accent-gold);
+}
+
+.parceiros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.parceiro {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--primary-red);
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(220, 20, 60, 0.2);
+}
+
+.parceiro img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.parceiro p {
+    font-size: 16px;
+    color: var(--light-text);
+    margin-bottom: 10px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.parceiro a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--accent-gold);
+}
+
+.parceiro:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px var(--accent-gold);
+}
+
+.cart-fixed {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.cart-fixed button {
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--accent-green);
+    border: 2px solid var(--accent-green);
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+}
+
+.cart-fixed button:hover {
+    background: var(--accent-green);
+    color: var(--dark-bg);
+    transform: scale(1.05);
+}
+
+.help-fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--primary-red);
+    border: 2px solid var(--primary-red);
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--accent-gold);
+    text-shadow: 0 0 5px var(--accent-gold);
+    font-family: 'Fredoka', sans-serif;
+}
+
+.help-fixed-button:hover {
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--accent-gold);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: rgba(17, 17, 17, 0.95);
+    border: 2px solid var(--accent-gold);
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 520px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 0 30px var(--accent-gold);
+    color: var(--light-text);
+    position: relative;
+    backdrop-filter: blur(20px);
+    font-family: 'Fredoka', sans-serif;
+}
+
+.modal-content h3 {
+    margin: 0 0 24px 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-red);
+    text-align: center;
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 10px var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+}
+
+.close-modal {
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    color: var(--accent-green);
+    text-shadow: 0 0 10px var(--accent-gold);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.close-modal:hover {
+    color: var(--light-text);
+    transform: rotate(90deg) scale(1.1);
+    opacity: 1;
+}
+
+
+/* Estilos para itens do carrinho, total, botões adaptados com cores natalinas */
+
+#modal-cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-gold) transparent;
+}
+
+#modal-cart-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modal-cart-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#modal-cart-items::-webkit-scrollbar-thumb {
+    background: var(--accent-gold);
+    border-radius: 3px;
+}
+
+.cart-item-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--light-text);
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-red);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.2);
+    font-family: 'Fredoka', sans-serif;
+}
+
+.cart-item-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-red), var(--accent-green));
+    box-shadow: 0 0 5px var(--accent-gold);
+}
+
+.cart-item-modal:hover {
+    background: rgba(220, 20, 60, 0.1);
+    transform: translateX(4px);
+    box-shadow: 0 0 15px var(--accent-gold);
+}
+
+.cart-item-modal span {
+    flex: 1;
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+.cart-item-modal button {
+    background: linear-gradient(135deg, var(--primary-red), var(--accent-green));
+    color: var(--light-text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-red);
+    min-width: 80px;
+    font-family: 'Baloo 2', cursive;
+}
+
+.cart-item-modal button:hover {
+    background: linear-gradient(135deg, var(--accent-green), var(--primary-red));
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent-gold);
+}
+
+#modal-total {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-shadow: 0 0 10px var(--accent-gold);
+    margin-bottom: 24px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-red), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+}
+
+#checkout-button,
+#clear-cart {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Baloo 2', cursive;
+}
+
+#checkout-button {
+    background: linear-gradient(135deg, var(--success-green), #228B22);
+    color: var(--light-text);
+    box-shadow: 0 0 15px var(--success-green);
+}
+
+#checkout-button:hover {
+    background: linear-gradient(135deg, #228B22, #006400);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #32CD32;
+}
+
+#clear-cart {
+    background: linear-gradient(135deg, var(--primary-red), #FF0000);
+    color: var(--light-text);
+    box-shadow: 0 0 15px var(--primary-red);
+}
+
+#clear-cart:hover {
+    background: linear-gradient(135deg, #FF0000, var(--primary-red));
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-gold);
+}
+
+#checkout-form h3,
+#checkout-form h4 {
+    color: var(--accent-green);
+    text-shadow: 0 0 10px var(--accent-gold);
+    margin-bottom: 10px;
+    font-family: 'Baloo 2', cursive;
+}
+
+#checkout-form input,
+#checkout-form textarea,
+#checkout-form select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--accent-gold);
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--light-text);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    font-family: 'Fredoka', sans-serif;
+    resize: vertical;
+}
+
+#checkout-form input:focus,
+#checkout-form textarea:focus {
+    border-color: var(--primary-red);
+    outline: none;
+    box-shadow: 0 0 10px var(--accent-gold);
+}
+
+#checkout-form button {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--accent-green);
+    border: 2px solid var(--accent-green);
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px var(--accent-gold);
+    box-shadow: 0 0 10px var(--accent-gold);
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+}
+
+#checkout-form button:hover {
+    background-color: var(--accent-green);
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px var(--accent-gold);
+}
+
+#pix-details {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--success-green);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px var(--success-green);
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment-options label {
+    font-size: 16px;
+    padding: 10px;
+    background: rgba(17, 17, 17, 0.8);
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid var(--primary-red);
+}
+
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: linear-gradient(to right, var(--primary-red), #FF0000);
+    color: var(--light-text);
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    display: none;
+    z-index: 1002;
+    box-shadow: 0 0 20px var(--accent-gold);
+    font-weight: bold;
+    animation: slideIn 0.3s ease;
+    font-family: 'Fredoka', sans-serif;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification.success {
+    background: linear-gradient(to right, var(--success-green), #228B22);
+    color: var(--light-text);
+    box-shadow: 0 0 20px var(--success-green);
+}
+
 footer {
-  background: #111;
-  color: white;
-  padding: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--light-text);
+    text-align: center;
+    padding: 40px;
+    font-size: 20px;
+    text-shadow: 0 0 10px var(--accent-gold);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-gold);
+    border-top: 2px solid var(--accent-green);
+    font-family: 'Fredoka', sans-serif;
+}
+
+
+/* Responsivo para Mobile */
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .main-nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .main-nav.active ul {
+        display: flex;
+    }
+    .mobile-menu-toggle {
+        display: block;
+    }
+    .hero-banner,
+    .menu-section,
+    .parceiros-section {
+        padding: 40px 20px;
+    }
+    .banner-content h2 {
+        font-size: 32px;
+    }
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .tabs {
+        flex-direction: column;
+    }
+    .tab-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+    .payment-options label {
+        font-size: 14px;
+        padding: 8px;
+    }
+    #checkout-form input,
+    #checkout-form textarea {
+        font-size: 16px;
+        padding: 12px;
+    }
+    #checkout-form button {
+        font-size: 18px;
+        padding: 15px;
+    }
+    .help-fixed-button {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    .christmas-tree {
+        width: 60px;
+        height: 60px;
+        bottom: 10px;
+        left: 10px;
+    }
+    .snowflake {
+        font-size: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
