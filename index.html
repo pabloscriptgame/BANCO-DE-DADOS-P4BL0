@@ -4,508 +4,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DêGusto Lanchonete Natalino</title>
+    <title>Batata Recheada Monte - Delivery de Batatas Recheadas Deliciosas em Monte Carmelo, MG</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://i.ibb.co/dwtWsHQ6/favicon-32x32.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Batata Recheada Monte: As melhores batatas recheadas em Monte Carmelo, MG. Delivery rápido e delicioso! Peça agora via WhatsApp.">
+    <meta name="keywords" content="batata recheada, Monte Carmelo, delivery, comida rápida, recheios gourmet">
+    <link rel="icon" href="https://i.ibb.co/678MfNfq/20251102-111004.png" type="image/png">
 </head>
 
 <body>
     <header>
-        <div class="header-container">
-            <a href="#" class="logo-link">
+        <nav>
+            <div class="logo-section">
                 <div class="logo">
-                    <img src="https://i.ibb.co/gBM97H1/Background-Eraser-20250817-112249455.png" alt="DêGusto Logo" class="logo-image">
-                    <p>Atendimento a partir das 19H! Feliz Natal!</p>
+                    <img src="https://i.ibb.co/fdQ1Bt4S/20251022-124747.png" alt="Logo Batata Recheada Monte" class="logo-img">
                 </div>
-            </a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#cardapio">Cardápio</a></li>
-                    <li><a href="www.degusto.store/radio.html">Rádio</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu-toggle">☰</div>
-        </div>
+                <button class="hamburger" onclick="toggleMobileMenu()">≡</button>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" onclick="closeMobileMenu()">Início</a></li>
+                <li><a href="#menu" onclick="closeMobileMenu()">Cardápio</a></li>
+                <li><a href="#bebidas" onclick="closeMobileMenu()">Bebidas</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contato</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="inicio" class="hero-banner">
-        <div class="banner-content">
-            <h2>Bem-vindo(a) ao Natal DêGusto!</h2>
-            <div class="marquee">
-                <div class="marquee-text">Ho Ho Ho! Fim de semana com sabor natalino é na Degusto! • Peça Já e Celebre! Ho Ho Ho!</div>
-            </div>
-            <a href="#cardapio" class="cta-button">Ver Cardápio Natalino</a>
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Bem-vindo(a) à Batata Recheada Monte</h1>
+            <p>Descubra sabores irresistíveis em Monte Carmelo, MG. Batatas recheadas artesanais, preparadas com ingredientes frescos e amor. Delivery disponível!</p>
+            <center>
+                <img src="https://i.ibb.co/DfMRR5hz/20251031-173449-1.jpg" alt="Batata Recheada Monte - Promoção Especial de Recheios Deliciosos" width="400" height="160">
+            </center>
+            <a href="#menu" class="btn">Ver Cardápio</a>
         </div>
     </section>
-    <center>
-        <img src="https://i.ibb.co/tTNQ0smj/20251017-195232.png" alt="Banner Natalino" width="400" height="160">
-    </center>
 
-    <!-- Elementos de Natal: Árvore de Natal SVG simples -->
-    <svg class="christmas-tree" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 90 L40 70 L60 70 Z" fill="#228B22" />
-        <path d="M50 70 L30 50 L70 50 Z" fill="#32CD32" />
-        <path d="M50 50 L20 30 L80 30 Z" fill="#006400" />
-        <rect x="48" y="85" width="4" height="15" fill="#8B4513" />
-        <circle cx="50" cy="25" r="3" fill="#FFD700" />
-    </svg>
-
-    <section id="cardapio" class="menu-section">
-        <h2>Cardápio Natalino</h2>
-        <div class="tabs">
-            <button class="tab-button active" data-tab="hamburgueres">🍔 Hambúrgueres</button>
-            <button class="tab-button" data-tab="combos">🎁 Combos</button>
-            <button class="tab-button" data-tab="molhos">🧂 Molhos</button>
-            <button class="tab-button" data-tab="batatas">🍟 Batatas</button>
-            <button class="tab-button" data-tab="bebidas">🥤 Bebidas</button>
-        </div>
-
-        <div id="hamburgueres" class="tab-panel active">
-            <h3>🍔 Hambúrgueres</h3>
-            <div class="menu-grid">
-                <div class="item" data-name="X-COSTELA" data-price="30.00">
-                    <img src="https://i.ibb.co/QjhNdtMh/20251009-134607.jpg" alt="X-COSTELA" class="item-image">
-                    <h3>X-COSTELA</h3>
-                    <p>Pão artesanal, costela desfiada suculenta, queijo cheddar derretido, anéis de cebola crocantes, molho barbecue especial, cebola caramelizada, bacon crocante e milho doce.</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+    <!-- CARDÁPIO -->
+    <section id="menu">
+        <h2>Nosso Cardápio de Batatas Recheadas</h2>
+        <div class="menu-grid">
+            <!-- ITEM 1 -->
+            <div class="menu-item">
+                <h3>Carne Seca ao Molho Branco</h3>
+                <img src="https://i.ibb.co/qMkNt06Q/20251031-155022.jpg" alt="Batata Recheada com Carne Seca ao Molho Branco" class="menu-img">
+                <p>Carne seca desfiada, molho branco cremoso, mussarela derretida, requeijão, bacon crocante e cebolinha. Perfeita para quem ama sabores intensos!</p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="500g" data-price="34.00">500g - R$34,00</button>
+                    <button class="size-btn" data-size="750g" data-price="51.00">750g - R$51,00</button>
                 </div>
-                <div class="item" data-name="ESPECIAL TILÁPIA" data-price="30.00">
-                    <img src="https://i.ibb.co/7cYcLrD/IMG-20250924-WA0010.jpg" alt="ESPECIAL TILÁPIA" class="item-image">
-                    <h3>ESPECIAL TILÁPIA</h3>
-                    <p>Hambúrguer de tilápia grelhada, anéis de cebola empanados, queijo muçarela, molho de picles caseiro, milho fresco e salada crocante.</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="ARTESANAL GOIABADA" data-price="30.00">
-                    <img src="https://i.ibb.co/4nfgvWGn/IMG-20250924-WA0009.jpg" alt="ARTESANAL GOIABADA" class="item-image">
-                    <h3>ARTESANAL GOIABADA</h3>
-                    <p>Hambúrguer artesanal de carne bovina, molho de goiabada especial, cebola caramelizada, milho, bacon crocante, presunto, muçarela e salada fresca.</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="ESPECIAL STEAK" data-price="30.00">
-                    <img src="https://i.ibb.co/MxtW5hX2/IMG-20250928-WA0026.jpg" alt="ESPECIAL STEAK" class="item-image">
-                    <h3>ESPECIAL STEAK</h3>
-                    <p>Steak de frango grelhado, anéis de cebola, molho barbecue, maionese de churrasco, presunto, muçarela, bacon, milho e salada.</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-DÊ-GUSTO" data-price="28.00">
-                    <img src="https://i.ibb.co/NgtBB7Nb/20251004-234747.jpg" alt="X-DÊ-GUSTO" class="item-image">
-                    <h3>X-DÊ-GUSTO</h3>
-                    <p>Pão premium, 2 hambúrgueres de picanha, ovo frito, salsicha artesanal, presunto, muçarela, bacon, milho, cheddar, Catupiry e batata palha.</p>
-                    <span>R$ 28,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="ARTESANAL CLÁSSICO" data-price="28.00">
-                    <img src="https://i.ibb.co/0pRMs7CM/20251004-235952.jpg" alt="ARTESANAL CLÁSSICO" class="item-image">
-                    <h3>ARTESANAL CLÁSSICO</h3>
-                    <p>Pão artesanal, hambúrguer artesanal, bacon crocante, cheddar, cebola caramelizada, presunto, muçarela, milho, batata palha e salada.</p>
-                    <span>R$ 28,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="ARTESANAL DORITOS" data-price="30.00">
-                    <img src="https://i.ibb.co/ZpvH013t/20251004-235135.jpg" alt="ARTESANAL DORITOS" class="item-image">
-                    <h3>ARTESANAL DORITOS</h3>
-                    <p>Pão artesanal, hambúrguer artesanal, bacon, cheddar, cebola caramelizada, milho, presunto, muçarela, Doritos e salada.</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="ARTESANAL DUPLO" data-price="35.00">
-                    <img src="https://i.ibb.co/JR70qRfW/20251004-235417.jpg" alt="ARTESANAL DUPLO" class="item-image">
-                    <h3>ARTESANAL DUPLO</h3>
-                    <p>Pão artesanal, 2 hambúrgueres artesanais, bacon, cheddar, cebola caramelizada, presunto, muçarela, milho e batata palha.</p>
-                    <span>R$ 35,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-BOLO GIGANTE" data-price="42.00">
-                    <img src="https://i.ibb.co/k2SFHZds/20251004-235801.jpg" alt="X-BOLO GIGANTE" class="item-image">
-                    <h3>X-BOLO GIGANTE</h3>
-                    <p>Pão, 2 hambúrgueres, 2 salsichas, 2 ovos, bacon, calabresa, muçarela. Finalizado com muito cheddar e batata frita.</p>
-                    <span>R$ 42,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-TUDO" data-price="24.00">
-                    <img src="https://i.ibb.co/Z1d5Q46K/x-tudo.png" alt="X-TUDO" class="item-image">
-                    <h3>X-TUDO</h3>
-                    <p>Pão artesanal, hambúrguer de picanha, ovo frito, presunto, muçarela, milho, bacon, Catupiry e salada crocante.</p>
-                    <span>R$ 24,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-BACON" data-price="22.00">
-                    <img src="https://i.ibb.co/Pv8DLymw/IMG-20251004-WA0057.jpg" alt="X-BACON" class="item-image">
-                    <h3>X-BACON</h3>
-                    <p>Pão, hambúrguer de picanha, ovo, presunto, muçarela, milho, bacon, Catupiry e salada.</p>
-                    <span>R$ 22,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-CALABRESA" data-price="22.00">
-                    <img src="https://i.ibb.co/4wFq4fLJ/IMG-20251004-WA0058.jpg" alt="X-CALABRESA" class="item-image">
-                    <h3>X-CALABRESA</h3>
-                    <p>Pão artesanal, hambúrguer de picanha, ovo, presunto, muçarela, milho, calabresa, cheddar e salada.</p>
-                    <span>R$ 22,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-CHEDDAR" data-price="22.00">
-                    <img src="https://i.ibb.co/TMWKbdX5/IMG-20251004-WA0056.jpg" alt="X-CHEDDAR" class="item-image">
-                    <h3>X-CHEDDAR</h3>
-                    <p>Pão, hambúrguer de picanha, presunto, muçarela, salsicha, milho, bacon, cheddar e salada.</p>
-                    <span>R$ 22,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-SALADA" data-price="16.00">
-                    <img src="https://i.ibb.co/rfLz4R5n/20251004-210159.jpg" alt="X-SALADA" class="item-image">
-                    <h3>X-SALADA</h3>
-                    <p>Pão artesanal, hambúrguer de picanha, presunto, muçarela, Catupiry, milho e salada crocante.</p>
-                    <span>R$ 16,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-STEAK" data-price="20.00">
-                    <img src="https://i.ibb.co/2YPmtwTr/20251004-210226.jpg" alt="X-STEAK" class="item-image">
-                    <h3>X-STEAK</h3>
-                    <p>Pão, steak de frango, presunto, muçarela, milho, molho verde, molho barbecue, batata palha e salada.</p>
-                    <span>R$ 20,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-DOBRO PODEROSO" data-price="35.00">
-                    <img src="https://i.ibb.co/YvDjLbb/X-DOBRO-PODEROSO.png" alt="X-DOBRO PODEROSO" class="item-image">
-                    <h3>X-DOBRO PODEROSO</h3>
-                    <p>Pão artesanal, 2 hambúrgueres, 2 salsichas, 2 ovos, bacon, cheddar, Catupiry, presunto, muçarela, milho e batata palha.</p>
-                    <span>R$ 35,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="X-BAGUNÇA" data-price="33.00">
-                    <img src="https://i.ibb.co/FkL8N4xZ/20251004-235318.jpg" alt="X-BAGUNÇA" class="item-image">
-                    <h3>X-BAGUNÇA</h3>
-                    <p>Pão, hambúrguer de picanha, steak de frango, bacon, salsicha, presunto, muçarela, Catupiry, cheddar, milho, batata palha e salada.</p>
-                    <span>R$ 33,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
+                <button class="add-to-cart" onclick="addToCart('Carne Seca ao Molho Branco', this)">Adicionar ao Carrinho</button>
             </div>
-        </div>
 
-        <div id="combos" class="tab-panel">
-            <h3>🎁 Combos Irresistíveis</h3>
-            <div class="menu-grid">
-                <div class="item" data-name="COMBO DUPLO TUDO" data-price="42.00">
-                    <h3>COMBO DUPLO TUDO</h3>
-                    <img src="https://i.ibb.co/N2tfVFDv/20251004-190907.jpg" alt="##" class="item-image">
-                    <p>2 X-Tudos Premium - Perfeito para compartilhar!</p>
-                    <span>R$ 42,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+            <!-- ITEM 2 -->
+            <div class="menu-item">
+                <h3>Bacon ao Molho Branco</h3>
+                <img src="https://i.ibb.co/S4RTd1QF/20251031-162528.jpg" alt="Batata Recheada com Bacon ao Molho Branco" class="menu-img">
+                <p>Bacon em cubos, molho branco artesanal, mussarela, requeijão cremoso e toque de cebolinha. Crocante e cremoso na medida certa!</p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="500g" data-price="32.00">500g - R$32,00</button>
+                    <button class="size-btn" data-size="750g" data-price="48.00">750g - R$48,00</button>
                 </div>
-                <div class="item" data-name="COMBO KIDS" data-price="25.00">
-                    <h3>COMBO KIDS</h3>
-                    <img src="https://i.ibb.co/BHBGt9pB/20251006-193714.jpg" alt="##" class="item-image">
-                    <p>hambúrguer + Batata Frita + Refrigerante + Bala Fine - O sabor que encanta os pequenos!</p>
-                    <span>R$ 25,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO FAMÍLIA" data-price="50.00">
-                    <h3>COMBO FAMÍLIA</h3>
-                    <img src="https://i.ibb.co/Tq79qZsF/unnamed.png" alt="##" class="item-image">
-                    <p>2 hambúrgueres X-Tudo + 2 refrigerantes 200ml - Combo completo!</p>
-                    <span>R$ 50,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO DUPLO PODER" data-price="46.00">
-                    <h3>COMBO DUPLO PODER</h3>
-                    <img src="https://i.ibb.co/yc54yqmG/unnamed-1.png" alt="##" class="item-image">
-                    <p>2 hambúrgueres X-Dobro Poderoso - Para quem tem muita fome!</p>
-                    <span>R$ 46,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO X-TUDO COMPLETO" data-price="27.00">
-                    <h3>COMBO X-TUDO COMPLETO</h3>
-                    <img src="https://i.ibb.co/mVXhYyWX/unnamed-2.png" alt="##" class="item-image">
-                    <p>1 X-Tudo + Batata tamanho P + Refrigerante 200ml - Combo individual perfeito!</p>
-                    <span>R$ 27,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO LEVE E SAUDÁVEL" data-price="23.00">
-                    <h3>COMBO LEVE E SAUDÁVEL</h3>
-                    <img src="https://i.ibb.co/20K3Nbt4/unnamed-3.png" alt="##" class="item-image">
-                    <p>1 X-Salada Fresca + Batata tamanho P + Refrigerante 200ml - Opção mais leve!</p>
-                    <span>R$ 23,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO TRIO TUDO" data-price="70.00">
-                    <h3>COMBO TRIO TUDO</h3>
-                    <img src="https://i.ibb.co/fdYSdNS5/unnamed-4.png" alt="##" class="item-image">
-                    <p>3 hambúrgueres X-Tudo + 3 refrigerantes 200ml - Para 3 pessoas!</p>
-                    <span>R$ 70,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO COMPLETO FAMÍLIA" data-price="50.00">
-                    <h3>COMBO COMPLETO FAMÍLIA</h3>
-                    <img src="https://i.ibb.co/HfhKPBR2/unnamed-5.png" alt="##" class="item-image">
-                    <p>2 X-Tudo + 2 refrigerantes + Batata tamanho P - Combo familiar completo!</p>
-                    <span>R$ 50,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO SUPREMO DÊ-GUSTO" data-price="30.00">
-                    <h3>COMBO SUPREMO DÊ-GUSTO</h3>
-                    <img src="https://i.ibb.co/v4hsD1Q5/unnamed-6.png" alt="##" class="item-image">
-                    <p>1 X-Dê-Gusto Supremo + Batata tamanho P + Refrigerante 200ml - O melhor!</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO TRIO PURO" data-price="60.00">
-                    <h3>COMBO TRIO PURO</h3>
-                    <img src="https://i.ibb.co/Mkbt7V68/unnamed-7.png" alt="##" class="item-image">
-                    <p>3 hambúrgueres X-Tudo - Para quem quer só hambúrguer!</p>
-                    <span>R$ 60,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO DUPLO ARTESANAL" data-price="52.00">
-                    <h3>COMBO DUPLO ARTESANAL</h3>
-                    <img src="https://i.ibb.co/35BsyMfj/unnamed-10.png" alt="##" class="item-image">
-                    <p>2 hambúrgueres Artesanal Clássico - Qualidade premium em dobro!</p>
-                    <span>R$ 52,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COMBO ARTESANAL + REFRIGERANTE" data-price="30.00">
-                    <h3>COMBO ARTESANAL + REFRIGERANTE</h3>
-                    <img src="https://i.ibb.co/8gG8FsCS/unnamed-8.png" alt="##" class="item-image">
-                    <p>1 Artesanal Clássico + Refrigerante 200ml - Combinação perfeita!</p>
-                    <span>R$ 30,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
+                <button class="add-to-cart" onclick="addToCart('Bacon ao Molho Branco', this)">Adicionar ao Carrinho</button>
             </div>
-        </div>
 
-        <div id="molhos" class="tab-panel">
-            <h3>🧂 Molhos Especiais</h3>
-            <div class="menu-grid">
-                <div class="item" data-name="MOLHO CHURRASCO" data-price="3.00">
-                    <h3>MOLHO CHURRASCO</h3>
-                    <p>Molho barbecue caseiro com toque defumado - Perfeito para carnes!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+            <!-- ITEM 3 -->
+            <div class="menu-item">
+                <h3>Frango ao Molho Branco ou Sugo</h3>
+                <img src="https://i.ibb.co/NQYzmBv/20251031-162513.jpg" alt="Batata Recheada com Frango ao Molho Branco ou Sugo" class="menu-img">
+                <p>Frango suculento em cubos, escolha seu molho, mussarela, bacon, requeijão e finalização perfeita. Opção leve e saborosa!</p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="500g" data-price="30.00">500g - R$30,00</button>
+                    <button class="size-btn" data-size="750g" data-price="45.00">750g - R$45,00</button>
                 </div>
-                <div class="item" data-name="MOLHO DE ALHO" data-price="3.00">
-                    <h3>MOLHO DE ALHO</h3>
-                    <p>Cremoso molho de alho com ervas frescas - Clássico irresistível!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO VERDE" data-price="3.00">
-                    <h3>MOLHO VERDE</h3>
-                    <p>Molho verde refrescante com ervas e limão - Leve e saboroso!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO GOIABADA" data-price="3.00">
-                    <h3>MOLHO GOIABADA</h3>
-                    <p>Molho exclusivo de goiabada com especiarias - Nossas especialidade!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO PICLES" data-price="3.00">
-                    <h3>MOLHO PICLES</h3>
-                    <p>Molho de picles caseiro com toque de mostarda - Crocante e ácido!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO CHEDDAR" data-price="3.00">
-                    <h3>MOLHO CHEDDAR</h3>
-                    <p>Queijo cheddar cremoso derretido - Para os amantes de queijo!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO CATUPIRY" data-price="3.00">
-                    <h3>MOLHO CATUPIRY</h3>
-                    <p>Clássico Catupiry cremoso - Nobreza no sabor!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO BARBECUE" data-price="3.00">
-                    <h3>MOLHO BARBECUE</h3>
-                    <p>Molho barbecue tradicional com mel - Doce e defumado!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="CEBOLA CARAMELIZADA" data-price="3.00">
-                    <h3>CEBOLA CARAMELIZADA</h3>
-                    <p>Cebola caramelizada com toque de balsâmico - Doçura perfeita!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO PIMENTA" data-price="3.00">
-                    <h3>MOLHO PIMENTA</h3>
-                    <p>Molho de pimenta habanero com mel - Picante com equilíbrio!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOSTARDA MEL" data-price="3.00">
-                    <h3>MOSTARDA MEL</h3>
-                    <p>Mostarda Dijon com mel puro - Doce e picante na medida!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO MARACUJÁ" data-price="3.00">
-                    <h3>MOLHO MARACUJÁ</h3>
-                    <p>Molho de maracujá com toque apimentado - Tropical e ousado!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO ABACAXI" data-price="3.00">
-                    <h3>MOLHO ABACAXI</h3>
-                    <p>Molho de abacaxi grelhado com curry - Exótico e surpreendente!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MOLHO MORANGO" data-price="3.00">
-                    <h3>MOLHO MORANGO</h3>
-                    <p>Molho de morango NOVO - Exótico e raro!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
+                <button class="add-to-cart" onclick="addToCart('Frango ao Molho Branco ou Sugo', this)">Adicionar ao Carrinho</button>
             </div>
-        </div>
 
-        <div id="batatas" class="tab-panel">
-            <h3>🍟 Porções Crocantes</h3>
-            <div class="menu-grid">
-                <div class="item" data-name="BATATA PETIT" data-price="10.00">
-                    <h3>BATATA PETIT</h3>
-                    <img src="https://i.ibb.co/DHFbLZ1j/20251004-212248.jpg" alt="BATATA PETIT" class="item-image">
-                    <p>200g de batata frita crocante com bacon e cheddar derretido - Porção individual perfeita!</p>
-                    <span>R$ 10,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+            <!-- ITEM 4 -->
+            <div class="menu-item">
+                <h3>Calabresa ao Molho Branco e Sugo</h3>
+                <img src="https://i.ibb.co/5xJzc1Dg/20251031-162330.jpg" alt="Batata Recheada com Calabresa ao Molho Branco e Sugo" class="menu-img">
+                <p>Calabresa defumada, molho duplo, mussarela, bacon, requeijão e cebolinha picante. Picância e sabor em cada mordida!</p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="500g" data-price="32.00">500g - R$32,00</button>
+                    <button class="size-btn" data-size="750g" data-price="48.00">750g - R$48,00</button>
                 </div>
-                <div class="item" data-name="BATATA MÉDIA" data-price="20.00">
-                    <h3>BATATA MÉDIA</h3>
-                    <img src="https://i.ibb.co/xSYsNTCd/20251004-212201.jpg" alt="BATATA MÉDIA" class="item-image">
-                    <p>400g de batata frita com bacon crocante e cheddar - Para compartilhar!</p>
-                    <span>R$ 20,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="BATATA GIGANTE" data-price="35.00">
-                    <h3>BATATA GIGANTE</h3>
-                    <img src="https://i.ibb.co/gZjJ6gkL/bata-tamnho-g-30-reais.png" alt="BATATA GIGANTE" class="item-image">
-                    <p>300g de batata frita completa com salsicha, hambúrguer, calabresa, bacon, salada, muçarela e cheddar - A maior porção!</p>
-                    <span>R$ 35,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
+                <button class="add-to-cart" onclick="addToCart('Calabresa ao Molho Branco e Sugo', this)">Adicionar ao Carrinho</button>
             </div>
-        </div>
 
-        <div id="bebidas" class="tab-panel">
-            <h3>🥤 Bebidas Geladas</h3>
-            <div class="menu-grid">
-                <div class="item" data-name="COCA-COLA 2L" data-price="14.00">
-                    <h3>COCA-COLA 2L</h3>
-                    <p>Coca-Cola 2L geladinha - Perfeita para compartilhar com a família!</p>
-                    <span>R$ 14,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+            <!-- ITEM 5 -->
+            <div class="menu-item">
+                <h3>Fraldinha ao Molho Sugo</h3>
+                <img src="https://i.ibb.co/Y4vMD3MM/20251031-162457.jpg" alt="Batata Recheada com Fraldinha ao Molho Sugo" class="menu-img">
+                <p>Costela desfiada ao molho sugo, mussarela derretida, requeijão, bacon e cebolinha. Sucesso garantido para os amantes de carne!</p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="500g" data-price="34.00">500g - R$34,00</button>
+                    <button class="size-btn" data-size="750g" data-price="51.00">750g - R$51,00</button>
                 </div>
-                <div class="item" data-name="COCA-COLA 1L" data-price="10.00">
-                    <h3>COCA-COLA 1L</h3>
-                    <p>Coca-Cola 1L bem gelada - Ideal para acompanhar seu hambúrguer!</p>
-                    <span>R$ 10,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="COCA-COLA LATA" data-price="6.00">
-                    <h3>COCA-COLA LATA</h3>
-                    <p>Coca-Cola lata gelada 350ml - Clássico sempre!</p>
-                    <span>R$ 6,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="FANTA LARANJA 2L" data-price="12.00">
-                    <h3>FANTA LARANJA 2L</h3>
-                    <p>Fanta Laranja 2L - Sabor cítrico refrescante para toda família!</p>
-                    <span>R$ 12,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="FANTA LARANJA 1L" data-price="10.00">
-                    <h3>FANTA LARANJA 1L</h3>
-                    <p>Fanta Laranja 1L gelada - Perfeita para um hambúrguer leve!</p>
-                    <span>R$ 10,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="KUAT 2L" data-price="10.00">
-                    <h3>KUAT 2L</h3>
-                    <p>Kuat Guaraná 2L - Sabor brasileiro autêntico e refrescante!</p>
-                    <span>R$ 10,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="MINEIRO 2L" data-price="12.00">
-                    <h3>MINEIRO 2L</h3>
-                    <p>Guaraná Mineiro 2L - Orgulho mineiro em cada gole!</p>
-                    <span>R$ 12,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-                <div class="item" data-name="PITHULÁ" data-price="3.00">
-                    <h3>PITHULÁ</h3>
-                    <p>Pithulá 200ml - Bebida regional geladinha para acompanhar!</p>
-                    <span>R$ 3,00</span>
-                    <button class="add-to-cart">Adicionar ao Carrinho</button>
-                </div>
+                <button class="add-to-cart" onclick="addToCart('Fraldinha ao Molho Sugo', this)">Adicionar ao Carrinho</button>
             </div>
         </div>
     </section>
 
-    <div class="cart-fixed">
-        <button id="open-cart-modal">🛒 Meu Carrinho (<span id="cart-count">0</span>)</button>
-    </div>
-
-    <button id="help-button" class="help-fixed-button">Ajuda Natalina</button>
-
-    <!-- Modais mantidos iguais ao original, com classes CSS adaptadas para tema natalino -->
-
-    <!-- Modal Carrinho -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>🛒 Seu Carrinho Natalino</h3>
-            <div id="modal-cart-items"></div>
-            <div id="modal-total">Total: R$ 0,00</div>
-            <button id="checkout-button">Finalizar Pedido 📲</button>
-            <button id="clear-cart">Limpar Carrinho 🗑️</button>
+    <!-- BEBIDAS -->
+    <section id="bebidas">
+        <h2>Bebidas para Acompanhar</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Coca-Cola Lata</h3>
+                <img src="https://i.ibb.co/qf5F4vn/20251031-163500.jpg" alt="Coca-Cola Lata 350ml" class="menu-img">
+                <p>Refrigerante Coca-Cola 350ml gelado. O clássico para refrescar seu paladar!</p>
+                <button class="add-to-cart" onclick="addToCart('Coca-Cola Lata', null, 5.00)">Adicionar R$5,00</button>
+            </div>
+            <div class="menu-item">
+                <h3>Coca-Cola Lata Zero</h3>
+                <img src="https://i.ibb.co/FkS7brzJ/20251031-163524.jpg" alt="Coca-Cola Lata Zero 350ml" class="menu-img">
+                <p>Coca-Cola Zero 350ml sem açúcar. Sabor sem culpa!</p>
+                <button class="add-to-cart" onclick="addToCart('Coca-Cola Lata Zero', null, 5.00)">Adicionar R$5,00</button>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Modal Checkout e Ajuda mantidos iguais, mas com textos natalinos opcionais -->
-
-    <div id="notification" class="notification"></div>
-
-    <footer>
-        <p>Entregamos sabor e alegria natalina em cada mordida! 🛵✨</p>
-        <p>© 2025/2026 DêGusto Lanchonete Premium — Feliz Natal com ❤️</p>
+    <footer id="contact">
+        <div class="social-links">
+            <a href="https://wa.me/553499194464" target="_blank">📱 WhatsApp: (34) 9.9919-4464 - Peça Agora!</a>
+            <a href="https://www.instagram.com/batatarecheadamonte" target="_blank">📸 Siga no Instagram @batatarecheadamonte</a>
+        </div>
+        <p>Endereço: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG | &copy; 2025 Batata Recheada Monte. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Elementos de Natal: Flocos de Neve CSS -->
-    <div class="snowflakes" aria-hidden="true">
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
-        <div class="snowflake">❄</div>
+    <!-- Carrinho Modal -->
+    <button id="cart-toggle" onclick="toggleCart()">
+        <span>🛒</span>
+        <span class="cart-count" id="cart-count">0</span>
+    </button>
+    <div id="cart">
+        <div class="cart-header">
+            <h3>Carrinho de Compras</h3>
+            <button onclick="toggleCart()" class="close-cart-header">×</button>
+        </div>
+        <div id="cart-items"></div>
+        <div id="delivery-line" class="cart-item" style="display: none;">
+            <span>Taxa de Entrega em Monte Carmelo</span><span>R$ 8,00</span>
+        </div>
+        <div id="cart-total" class="cart-total">Total: R$ 0,00</div>
+        <div class="delivery-options">
+            <h4>Opções de Entrega</h4>
+            <label><input type="radio" name="order-type" value="pickup" checked> Retirada no local: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG</label>
+            <label><input type="radio" name="order-type" value="delivery"> Entrega em Monte Carmelo (R$8,00)</label>
+        </div>
+        <div class="address-inputs" style="display: none;">
+            <h4>Endereço de Entrega em Monte Carmelo</h4>
+            <input type="text" id="customer-name" placeholder="Nome Completo">
+            <input type="text" id="street" placeholder="Rua/Avenida">
+            <input type="text" id="number" placeholder="Número">
+            <input type="text" id="neighborhood" placeholder="Bairro">
+        </div>
+        <div class="payment-options">
+            <h4>Método de Pagamento</h4>
+            <label><input type="radio" name="payment-type" value="dinheiro" checked onchange="toggleTrocoField()"> 💵 Dinheiro (troco disponível)</label>
+            <label><input type="radio" name="payment-type" value="cartao" onchange="toggleTrocoField()"> 💳 Cartão (Débito/Crédito)</label>
+            <label class="pix-label"><input type="radio" name="payment-type" value="pix" onchange="toggleTrocoField()"> 💰 Pix 
+                <span class="pix-key">Chave: 34999194464</span>
+                <button class="copy-pix-btn" onclick="copyPix()">📋 Copiar</button>
+            </label>
+            <div id="pix-qr-container" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 215, 0, 0.05); border-radius: 8px; text-align: center;">
+                <h5 style="color: var(--primary-gold); margin-bottom: 0.5rem;">Escaneie o QR Code para pagar via Pix</h5>
+                <div id="pix-qr" style="margin: 1rem auto; width: 200px; height: 200px;"></div>
+                <p id="pix-payload" style="font-family: monospace; font-size: 0.8rem; word-break: break-all; background: #000; color: #fff; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;"></p>
+                <button class="copy-payload-btn" onclick="copyPayload()">📋 Copiar Payload PIX</button>
+                <p>Valor: <span id="pix-amount" style="color: var(--primary-gold); font-weight: bold;"></span></p>
+            </div>
+            <div id="troco-field" class="troco-inputs" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 215, 0, 0.05); border-radius: 8px;">
+                <label>Troco para quanto? (R$)</label>
+                <input type="number" id="troco-value" placeholder="Ex: 50.00" step="0.01" min="0">
+            </div>
+        </div>
+        <button id="generate-pix-btn" style="display: none; margin: 1rem 0;" onclick="generatePixWithTotal()">Gerar PIX R$ 0,00</button>
+        <button id="checkout-btn" onclick="checkout()">Finalizar Pedido via WhatsApp</button>
     </div>
 
-    <!-- Luzes de Natal piscando -->
-    <div class="christmas-lights">
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-    </div>
+    <!-- Overlay para carrinho -->
+    <div id="cart-overlay" class="overlay"></div>
 
+    <!-- Container para Notificações (Toasts) -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
 

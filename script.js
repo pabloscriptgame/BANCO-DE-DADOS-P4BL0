@@ -1,242 +1,385 @@
-// script.js - Funcionalidades mantidas, com adição de efeitos natalinos leves (sem emojis, foco em animações CSS já no CSS)
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const pixCopyKey = '34999194464'; // Para cópia simples
+const pixPayloadKey = '+553499194464'; // Formato completo para payload PIX (telefone internacional)
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.classList.add('toast', type);
+    toast.textContent = message;
+    container.appendChild(toast);
 
-    mobileToggle.addEventListener('click', function() {
-        mainNav.classList.toggle('active');
+    // Mostra o toast
+    setTimeout(() => toast.classList.add('show'), 100);
+
+    // Remove após 3 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => container.removeChild(toast), 300);
+    }, 3000);
+}
+
+function copyPix() {
+    navigator.clipboard.writeText(pixCopyKey).then(() => {
+        showToast('Chave PIX copiada com sucesso!', 'success');
+    }).catch(() => {
+        showToast('Erro ao copiar chave PIX. Tente novamente.', 'error');
     });
+}
 
-    // Tab switching for menu
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.dataset.tab;
-
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanels.forEach(panel => panel.classList.remove('active'));
-
-            button.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
+// Função para copiar o payload PIX
+function copyPayload() {
+    const payloadEl = document.getElementById('pix-payload');
+    if (payloadEl && payloadEl.textContent) {
+        navigator.clipboard.writeText(payloadEl.textContent).then(() => {
+            showToast('Payload PIX copiado com sucesso! Cole no app do banco.', 'success');
+        }).catch(() => {
+            showToast('Erro ao copiar payload PIX. Tente novamente.', 'error');
         });
-    });
+    } else {
+        showToast('Payload não disponível. Gere o PIX primeiro.', 'error');
+    }
+}
 
-    // Cart functionality
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// Nova função para gerar PIX com total somado certinho
+function generatePixWithTotal() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const orderType = document.querySelector('input[name="order-type"]:checked').value;
+    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
+    const total = subtotal + deliveryFee;
 
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartCount = document.getElementById('cart-count');
-    const cartModal = document.getElementById('cart-modal');
-    const openCartModal = document.getElementById('open-cart-modal');
-    const closeCartModal = document.querySelector('#cart-modal .close-modal');
-    const checkoutButton = document.getElementById('checkout-button');
-    const clearCartButton = document.getElementById('clear-cart');
-    const modalCartItems = document.getElementById('modal-cart-items');
-    const modalTotal = document.getElementById('modal-total');
-
-    function updateCartCount() {
-        cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (total === 0) {
+        showToast('Adicione itens ao carrinho para gerar o PIX!', 'error');
+        return;
     }
 
-    function renderCart() {
-        modalCartItems.innerHTML = '';
-        let total = 0;
+    // Atualiza o texto do botão com o total certinho
+    document.getElementById('generate-pix-btn').textContent = `Gerar PIX R$ ${total.toFixed(2).replace('.', ',')}`;
 
-        cart.forEach((item, index) => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item-modal');
-            cartItem.innerHTML = `
-                <span>${item.name} (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2)}</span>
-                <button onclick="removeFromCart(${index})">Remover</button>
-            `;
-            modalCartItems.appendChild(cartItem);
-            total += item.price * item.quantity;
-        });
+    // Gera o QR e payload
+    generatePixQR(total);
+    showToast(`PIX gerado com valor total R$ ${total.toFixed(2).replace('.', ',')} !`, 'success');
+}
 
-        modalTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    window.removeFromCart = function(index) {
-        cart.splice(index, 1);
-        renderCart();
-        updateCartCount();
-        showNotification('Item removido do carrinho!', 'success');
-    };
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const item = button.closest('.item');
-            const name = item.dataset.name;
-            const price = parseFloat(item.dataset.price);
-
-            const existingItem = cart.find(cartItem => cartItem.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
+// Funções PIX
+function calculateCRC16(message) {
+    let crc = 0xFFFF;
+    const poly = 0x1021;
+    for (let i = 0; i < message.length; i++) {
+        crc ^= (message.charCodeAt(i) << 8);
+        for (let j = 0; j < 8; j++) {
+            if ((crc & 0x8000) !== 0) {
+                crc = ((crc << 1) & 0xFFFF) ^ poly;
             } else {
-                cart.push({ name, price, quantity: 1 });
+                crc = (crc << 1) & 0xFFFF;
             }
-
-            updateCartCount();
-            renderCart();
-            showNotification('Item adicionado ao carrinho natalino!', 'success');
-        });
-    });
-
-    openCartModal.addEventListener('click', () => {
-        cartModal.style.display = 'flex';
-        renderCart();
-    });
-
-    closeCartModal.addEventListener('click', () => {
-        cartModal.style.display = 'none';
-    });
-
-    window.onclick = function(event) {
-        if (event.target === cartModal) {
-            cartModal.style.display = 'none';
         }
-    };
+    }
+    return crc.toString(16).toUpperCase().padStart(4, '0');
+}
 
-    checkoutButton.addEventListener('click', () => {
-        cartModal.style.display = 'none';
-        document.getElementById('checkout-modal').style.display = 'flex';
-        document.getElementById('checkout-total').textContent = modalTotal.textContent;
+function generatePixPayload(amount) {
+    const merchantName = 'Batata Recheada Monte';
+    const merchantCity = 'Monte Carmelo';
+    let payload = '000201';
+    payload += '010212';
+    payload += `26${(13 + 'BR.GOV.BCB.PIX01' + pixPayloadKey.length).toString().length}${13}BR.GOV.BCB.PIX01${pixPayloadKey.length}${pixPayloadKey}`;
+    payload += '52040000';
+    payload += '5303BRL';
+    const amountCents = Math.round(amount * 100).toString();
+    payload += `54${amountCents.length}${amountCents}`;
+    payload += '5802BR';
+    payload += `59${merchantName.length}${merchantName}`;
+    payload += `60${merchantCity.length}${merchantCity}`;
+    const crcString = payload + '6304';
+    const checksum = calculateCRC16(crcString);
+    payload += `6304${checksum}`;
+    return payload;
+}
+
+function generatePixQR(total) {
+    const container = document.getElementById('pix-qr-container');
+    const qrElement = document.getElementById('pix-qr');
+    const payloadEl = document.getElementById('pix-payload');
+    const amountEl = document.getElementById('pix-amount');
+    if (!container || !QRCode) return; // Verifica se a lib está carregada
+
+    const payload = generatePixPayload(total);
+    payloadEl.textContent = payload;
+    amountEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+    // Limpa QR anterior
+    qrElement.innerHTML = '';
+
+    // Gera novo QR
+    new QRCode(qrElement, {
+        text: payload,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
+
+function addToCart(itemName, button, fixedPrice = null) {
+    const sizeButtons = button ? button.parentElement.querySelectorAll('.size-btn') : null;
+    let selectedSize = 'Padrão'; // Default para itens sem tamanho
+    let price = fixedPrice || 0;
+
+    if (sizeButtons) {
+        const selectedBtn = Array.from(sizeButtons).find(btn => btn.classList.contains('selected'));
+        if (!selectedBtn) {
+            showToast('Por favor, selecione um tamanho antes de adicionar ao carrinho!', 'error');
+            return;
+        }
+        selectedSize = selectedBtn.dataset.size;
+        price = parseFloat(selectedBtn.dataset.price);
+    }
+
+    // Verifica se o item já existe no carrinho (mesmo nome e tamanho)
+    const existingItemIndex = cart.findIndex(item => item.name === itemName && item.size === selectedSize);
+    if (existingItemIndex !== -1) {
+        // Incrementa a quantidade
+        cart[existingItemIndex].quantity += 1;
+        showToast(`${itemName} ${selectedSize} (quantidade atualizada para ${cart[existingItemIndex].quantity})!`, 'success');
+    } else {
+        // Adiciona novo item com quantidade 1
+        cart.push({ name: itemName, size: selectedSize, price: price, quantity: 1 });
+        showToast(`${itemName} ${selectedSize} adicionado ao carrinho!`, 'success');
+    }
+
+    updateCart();
+    if (sizeButtons) {
+        sizeButtons.forEach(btn => btn.classList.remove('selected'));
+        selectedBtn.classList.add('selected');
+    }
+}
+
+function updateQuantity(index, delta) {
+    cart[index].quantity += delta;
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1); // Remove se quantidade for 0 ou negativa
+    }
+    updateCart();
+}
+
+function removeFromCart(index) {
+    if (confirm('Tem certeza que deseja remover este item do carrinho?')) {
+        cart.splice(index, 1);
+        updateCart();
+        showToast('Item removido do carrinho com sucesso!', 'success');
+    }
+}
+
+function toggleTrocoField() {
+    const paymentType = document.querySelector('input[name="payment-type"]:checked').value;
+    const trocoField = document.getElementById('troco-field');
+    if (paymentType === 'dinheiro') {
+        trocoField.style.display = 'block';
+    } else {
+        trocoField.style.display = 'none';
+        document.getElementById('troco-value').value = '';
+    }
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cart-count');
+    cartItems.innerHTML = '';
+    let subtotal = 0;
+
+    cart.forEach((item, index) => {
+        const itemSubtotal = item.price * item.quantity;
+        subtotal += itemSubtotal;
+
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+            <div class="item-info">
+                <span class="item-name">${item.name}</span>
+                <span class="item-size">(${item.size})</span>
+                <div class="quantity-controls">
+                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                    <span class="qty-display">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                </div>
+            </div>
+            <div class="item-price">
+                <span class="item-subtotal">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</span>
+                <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>
+            </div>
+        `;
+        cartItems.appendChild(div);
     });
 
-    clearCartButton.addEventListener('click', () => {
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart();
-        updateCartCount();
-        showNotification('Carrinho limpo para novas compras natalinas!', 'success');
+    // Salva no localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Lógica para taxa de entrega/retirada
+    const orderType = document.querySelector('input[name="order-type"]:checked').value;
+    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
+    const deliveryLine = document.getElementById('delivery-line');
+    if (orderType === 'delivery') {
+        deliveryLine.style.display = 'flex';
+    } else {
+        deliveryLine.style.display = 'none';
+    }
+
+    const total = subtotal + deliveryFee;
+    totalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Atualiza o botão de gerar PIX se PIX estiver selecionado
+    const paymentType = document.querySelector('input[name="payment-type"]:checked') ? .value;
+    const generatePixBtn = document.getElementById('generate-pix-btn');
+    const pixContainer = document.getElementById('pix-qr-container');
+    if (paymentType === 'pix') {
+        pixContainer.style.display = 'block';
+        generatePixBtn.style.display = 'block';
+        generatePixBtn.textContent = `Gerar PIX R$ ${total.toFixed(2).replace('.', ',')}`;
+        generatePixQR(total); // Gera automaticamente ao selecionar PIX
+    } else {
+        pixContainer.style.display = 'none';
+        generatePixBtn.style.display = 'none';
+    }
+}
+
+function toggleCart() {
+    const cartEl = document.getElementById('cart');
+    const overlay = document.getElementById('cart-overlay');
+    cartEl.classList.toggle('open');
+    overlay.classList.toggle('show');
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        showToast('Seu carrinho está vazio! Adicione itens para continuar.', 'error');
+        return;
+    }
+
+    const orderType = document.querySelector('input[name="order-type"]:checked').value;
+    const paymentType = document.querySelector('input[name="payment-type"]:checked').value;
+
+    if (orderType === 'delivery') {
+        const customerName = document.getElementById('customer-name').value.trim();
+        const street = document.getElementById('street').value.trim();
+        const number = document.getElementById('number').value.trim();
+        const neighborhood = document.getElementById('neighborhood').value.trim();
+        if (!customerName || !street || !number || !neighborhood) {
+            showToast('Preencha todos os campos de endereço para entrega em Monte Carmelo!', 'error');
+            return;
+        }
+    }
+
+    let message = 'Olá! Gostaria de fazer um pedido na Batata Recheada Monte:\n\n';
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        message += `- ${item.name} (${item.size || ''}) x${item.quantity} - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
     });
 
-    // Checkout form
-    const checkoutForm = document.getElementById('checkout-form');
-    const checkoutModal = document.getElementById('checkout-modal');
-    const closeCheckoutModal = document.querySelector('#checkout-modal .close-modal');
-    const paymentRadios = document.querySelectorAll('input[name="pagamento"]');
-    const trocoDiv = document.getElementById('troco-div');
-    const pixDetails = document.getElementById('pix-details');
-    const couponInput = document.getElementById('coupon-input');
-    const couponApplyBtn = document.getElementById('coupon-apply-btn');
-    const couponStatus = document.getElementById('coupon-status');
-    let discount = 0;
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
+    const total = subtotal + deliveryFee;
+    message += `\nSubtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+    message += `Taxa de Entrega: R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
+    message += `Total a Pagar: R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
 
-    paymentRadios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            trocoDiv.style.display = radio.value === 'Dinheiro' ? 'block' : 'none';
-            pixDetails.style.display = radio.value === 'PIX' ? 'block' : 'none';
-        });
-    });
+    if (orderType === 'pickup') {
+        message += `Tipo de Pedido: Retirada no local\nEndereço: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG\n\n`;
+    } else {
+        const customerName = document.getElementById('customer-name').value;
+        const street = document.getElementById('street').value;
+        const number = document.getElementById('number').value;
+        const neighborhood = document.getElementById('neighborhood').value;
+        message += `Tipo de Pedido: Entrega\nEndereço:\nNome: ${customerName}\n${street}, ${number} - ${neighborhood}, Monte Carmelo - MG\n\n`;
+    }
 
-    couponApplyBtn.addEventListener('click', () => {
-        const code = couponInput.value.toUpperCase();
-        if (code === 'DEGUSTO5') {
-            discount = 0.05;
-            couponStatus.textContent = 'Cupom aplicado! 5% de desconto natalino.';
-            couponStatus.style.color = '#32CD32';
-            updateCheckoutTotal();
+    let paymentText = '';
+    if (paymentType === 'dinheiro') {
+        const trocoValue = document.getElementById('troco-value').value;
+        paymentText = `Método de Pagamento: Dinheiro (troco disponível)`;
+        if (trocoValue) {
+            paymentText += `\nTroco para: R$ ${parseFloat(trocoValue).toFixed(2).replace('.', ',')}`;
+        }
+        paymentText += `\n`;
+    } else if (paymentType === 'cartao') {
+        paymentText = 'Método de Pagamento: Cartão (Débito/Crédito)\n';
+    } else if (paymentType === 'pix') {
+        const payload = generatePixPayload(total);
+        paymentText = `Método de Pagamento: Pix\nChave: ${pixCopyKey}\nPayload PIX (copia e cole no app):\n${payload}\n\nOu escaneie o QR Code no site para pagar instantaneamente.`;
+    }
+    message += paymentText;
+
+    message += 'Aguardo confirmação do pedido! 😊';
+
+    const whatsappUrl = `https://wa.me/553499194464?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    showToast('Pedido enviado para o WhatsApp! Em breve entraremos em contato.', 'success');
+    cart = []; // Limpa carrinho após envio
+    localStorage.removeItem('cart'); // Remove do localStorage
+    updateCart();
+    toggleCart();
+}
+
+// Funções para Menu Mobile
+function toggleMobileMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('active');
+}
+
+function closeMobileMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.remove('active');
+}
+
+// Seleção de tamanho
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('size-btn')) {
+        e.target.parentElement.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+        e.target.classList.add('selected');
+    }
+});
+
+// Listener para mudança nas opções de entrega/retirada
+document.addEventListener('change', function(e) {
+    if (e.target.name === 'order-type') {
+        const addressInputs = document.querySelector('.address-inputs');
+        if (e.target.value === 'delivery') {
+            addressInputs.style.display = 'block';
+            document.getElementById('delivery-line').style.display = 'flex';
         } else {
-            couponStatus.textContent = 'Cupom inválido.';
-            couponStatus.style.color = '#FF4500';
-            discount = 0;
+            addressInputs.style.display = 'none';
+            document.getElementById('delivery-line').style.display = 'none';
         }
-    });
-
-    function updateCheckoutTotal() {
-        const total = parseFloat(modalTotal.textContent.replace('Total: R$ ', '')) * (1 - discount);
-        document.getElementById('checkout-total').textContent = `Total: R$ ${total.toFixed(2)}`;
+        updateCart();
     }
+});
 
-    checkoutForm.addEventListener('submit', function(e) {
+// Listener para toggle troco e PIX no pagamento
+document.addEventListener('change', function(e) {
+    if (e.target.name === 'payment-type') {
+        toggleTrocoField();
+        updateCart(); // Chama updateCart para gerenciar o botão PIX
+    }
+});
+
+// Scroll suave para links de navegação
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        const formData = new FormData(this);
-        let message = 'Olá! Novo pedido natalino na DêGusto Lanchonete:\n\n';
-
-        cart.forEach(item => {
-            message += `${item.name} (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
         });
-
-        message += `\nSubtotal: ${modalTotal.textContent}\n`;
-        if (discount > 0) message += `Desconto (5%): -R$ ${ (parseFloat(modalTotal.textContent.replace('Total: R$ ', '')) * 0.05).toFixed(2) }\n`;
-        message += `Total: ${document.getElementById('checkout-total').textContent}\n\n`;
-
-        message += `Nome: ${formData.get('nome-cliente')}\n`;
-        message += `Endereço: ${formData.get('rua')}, ${formData.get('numero')} - ${formData.get('bairro')}`;
-        if (formData.get('referencia')) message += ` (Ref: ${formData.get('referencia')})`;
-        message += `\nPagamento: ${formData.get('pagamento')}`;
-        if (formData.get('pagamento') === 'Dinheiro' && formData.get('troco')) message += ` (Troco para R$ ${formData.get('troco')})`;
-        message += `\nObservações: ${formData.get('observacoes') || 'Nenhuma'}\n`;
-
-        const whatsappNumber = '5510738419605'; // Substitua pelo número real do WhatsApp
-        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappURL, '_blank');
-
-        showNotification('Pedido natalino enviado para o WhatsApp! Aguarde confirmação com alegria.', 'success');
-        checkoutForm.reset();
-        checkoutModal.style.display = 'none';
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
     });
+});
 
-    closeCheckoutModal.addEventListener('click', () => {
-        checkoutModal.style.display = 'none';
-    });
+// Fechar carrinho ao clicar no overlay
+document.getElementById('cart-overlay').addEventListener('click', toggleCart);
 
-    window.onclick = function(event) {
-        if (event.target === checkoutModal) {
-            checkoutModal.style.display = 'none';
-        }
-    };
-
-    // Help modal
-    const helpButton = document.getElementById('help-button');
-    const helpModal = document.getElementById('help-modal');
-    const closeHelpModal = document.querySelector('#help-modal .close-modal');
-
-    helpButton.addEventListener('click', () => {
-        helpModal.style.display = 'flex';
-    });
-
-    closeHelpModal.addEventListener('click', () => {
-        helpModal.style.display = 'none';
-    });
-
-    window.onclick = function(event) {
-        if (event.target === helpModal) {
-            helpModal.style.display = 'none';
-        }
-    };
-
-    // PIX copy function
-    window.copyPix = function() {
-        navigator.clipboard.writeText('10738419605').then(() => {
-            showNotification('Chave PIX copiada para suas compras natalinas!', 'success');
-        });
-    };
-
-    // Notification function
-    function showNotification(message, type = '') {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.className = `notification ${type}`;
-        notification.style.display = 'block';
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 3000);
-    }
-
-    // Initialize
-    updateCartCount();
-    renderCart();
-
-    // Efeito natalino adicional: Adicionar classe para animação de entrada natalina
-    document.body.classList.add('christmas-loaded');
+// Inicializa o carrinho ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    updateCart();
+    toggleTrocoField(); // Inicializa o campo de troco
 });
