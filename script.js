@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Slider (só roda se existir slides)
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
+
     function nextSlide() {
         if (slides.length === 0) return;
         slides.forEach(s => s.classList.remove('active'));
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartModal.setAttribute('aria-hidden', 'false');
         updateCartDisplay();
     }
+
     function closeCartModal() {
         if (!cartModal) return;
         cartModal.classList.remove('active');
@@ -120,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = productCard.dataset.productId;
             const name = productCard.querySelector('h3') ? productCard.querySelector('h3').textContent : 'Produto';
             const priceText = productCard.querySelector('p') ? productCard.querySelector('p').textContent : 'R$ 0,00';
-            const price = parseFloat(priceText.replace('R$','').replace(/\./g,'').replace(',','.')) || 0;
+            const price = parseFloat(priceText.replace('R$', '').replace(/\./g, '').replace(',', '.')) || 0;
             const sizeEl = productCard.querySelector('.size-select');
             const size = sizeEl ? sizeEl.value : '';
             const qtyEl = productCard.querySelector('.qty-input');
@@ -242,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Seu carrinho está vazio!');
                 return;
             }
-            const total = cart.reduce((s,i) => s + (i.price * i.quantity), 0);
+            const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
             const itemsList = cart.map(i => `${i.name} (Tamanho ${i.size}) x${i.quantity} - R$ ${(i.price * i.quantity).toFixed(2)}`).join('\n');
             const message = `Olá! Gostaria de finalizar uma compra na Rafaela Oliveira Store.\n\nItens:\n${itemsList}\n\nTotal: R$ ${total.toFixed(2)}\n\nPor favor, confirme o pedido e formas de pagamento/entrega.`;
             const whatsappUrl = `https://wa.me/5534999194464?text=${encodeURIComponent(message)}`;
@@ -258,5 +260,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.scrollY > 100) header.style.background = 'rgba(255,255,255,0.95)';
         else header.style.background = '#fff';
     });
+
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-button');
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                // Remove active from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Remove active from all contents
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                // Add active to clicked
+                button.classList.add('active');
+                // Add active to target content
+                const targetContent = document.querySelector(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    }
 
 });

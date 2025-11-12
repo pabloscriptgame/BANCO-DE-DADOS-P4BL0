@@ -441,6 +441,52 @@ h2 {
 }
 
 
+/* Tabs for Categories */
+
+.tabs {
+    width: 100%;
+}
+
+.tab-headers {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: #f4f4f4;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background 0.3s;
+    font-size: 1em;
+}
+
+.tab-button.active {
+    background: #e91e63;
+    color: #fff;
+}
+
+.tab-button:hover {
+    background: #ddd;
+}
+
+.tab-button.active:hover {
+    background: #c2185b;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+
 /* Produtos Grid */
 
 .product-grid {
@@ -657,6 +703,10 @@ h2 {
     .cart-item-controls {
         width: 100%;
         justify-content: center;
+    }
+    .tab-headers {
+        flex-direction: column;
+        align-items: center;
     }
 }
 

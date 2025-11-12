@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafaela Oliveira Store - Moda Feminina</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -94,13 +96,216 @@
     <section id="categorias" class="categories">
         <div class="container">
             <h2>Categorias</h2>
-            <div class="category-grid">
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Blusas</h3></div>
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Bodys</h3></div>
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Conjuntos</h3></div>
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Vestidos</h3></div>
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Saias</h3></div>
-                <div class="category-card"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Shorts</h3></div>
+            <div class="tabs">
+                <div class="tab-headers">
+                    <button class="tab-button active" data-target="#tshirt-content">T-shirt</button>
+                    <button class="tab-button" data-target="#conjunto-content">Conjunto</button>
+                    <button class="tab-button" data-target="#vestido-content">Vestido</button>
+                    <button class="tab-button" data-target="#jeans-content">Jeans</button>
+                    <button class="tab-button" data-target="#cropped-content">Cropped</button>
+                </div>
+                <div class="tab-contents">
+                    <div id="tshirt-content" class="tab-content active">
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="ts1">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>T-shirt Básica Branca</h3>
+                                <p>R$ 59,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="ts2">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>T-shirt Estampada</h3>
+                                <p>R$ 69,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="ts3">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>T-shirt Listrada</h3>
+                                <p>R$ 64,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="conjunto-content" class="tab-content">
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="cj1">
+                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Conjunto Sport</h3>
+                                <p>R$ 119,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="cj2">
+                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Conjunto Casual</h3>
+                                <p>R$ 139,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="cj3">
+                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Conjunto Elegante</h3>
+                                <p>R$ 149,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="vestido-content" class="tab-content">
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="v1">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Vestido Floral</h3>
+                                <p>R$ 89,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="v2">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Vestido Midi</h3>
+                                <p>R$ 99,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="v3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Vestido Longo</h3>
+                                <p>R$ 109,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="jeans-content" class="tab-content">
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="j1">
+                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Jeans Skinny</h3>
+                                <p>R$ 129,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="j2">
+                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Jeans Boyfriend</h3>
+                                <p>R$ 119,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="j3">
+                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Jeans Mom</h3>
+                                <p>R$ 139,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cropped-content" class="tab-content">
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="cr1">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Cropped Básico</h3>
+                                <p>R$ 49,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="cr2">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Cropped Estampado</h3>
+                                <p>R$ 59,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                            <div class="product-card" data-product-id="cr3">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                                <h3>Cropped Rendado</h3>
+                                <p>R$ 69,90</p>
+                                <div class="product-options">
+                                    <label>Tamanho:</label>
+                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                    <label>Quantidade:</label>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                </div>
+                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -185,15 +390,38 @@
     <footer id="contato" class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section"><h3>Rafaela Oliveira Store</h3><p>Moda feminina com estilo e confiança.</p></div>
-                <div class="footer-section"><h4>Categorias</h4><ul><li><a href="#categorias">Blusas</a></li><li><a href="#categorias">Conjuntos</a></li><li><a href="#categorias">Vestidos</a></li><li><a href="#categorias">Saias</a></li></ul></div>
-                <div class="footer-section"><h4>Contato</h4><p>Email: contato@rafaelaoliveirastore.com.br</p><p>Tel: (11) 99999-9999</p><p>WhatsApp: <a href="https://wa.me/5534999194464" style="color: #25D366;">+55 34 99919-4464</a></p></div>
-                <div class="footer-section"><h4>Siga-nos</h4><div class="social-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="https://wa.me/5534999194464">WhatsApp</a></div></div>
+                <div class="footer-section">
+                    <h3>Rafaela Oliveira Store</h3>
+                    <p>Moda feminina com estilo e confiança.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#categorias">T-shirt</a></li>
+                        <li><a href="#categorias">Conjunto</a></li>
+                        <li><a href="#categorias">Vestido</a></li>
+                        <li><a href="#categorias">Jeans</a></li>
+                        <li><a href="#categorias">Cropped</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>Email: contato@rafaelaoliveirastore.com.br</p>
+                    <p>Tel: (11) 99999-9999</p>
+                    <p>WhatsApp: <a href="https://wa.me/5534999194464" style="color: #25D366;">+55 34 99919-4464</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Siga-nos</h4>
+                    <div class="social-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="https://wa.me/5534999194464">WhatsApp</a></div>
+                </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2025 Rafaela Oliveira Store. Todos os direitos reservados.</p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rafaela Oliveira Store. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
