@@ -1,198 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batata Recheada Monte - Delivery de Batatas Recheadas Deliciosas em Monte Carmelo, MG</title>
+    <title>Rafaela Oliveira Store - Moda Feminina</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <meta name="description" content="Batata Recheada Monte: As melhores batatas recheadas em Monte Carmelo, MG. Delivery rápido e delicioso! Peça agora via WhatsApp.">
-    <meta name="keywords" content="batata recheada, Monte Carmelo, delivery, comida rápida, recheios gourmet">
-    <link rel="icon" href="https://i.ibb.co/678MfNfq/20251102-111004.png" type="image/png">
 </head>
-
 <body>
-    <header>
-        <nav>
-            <div class="logo-section">
-                <div class="logo">
-                    <img src="https://i.ibb.co/fdQ1Bt4S/20251022-124747.png" alt="Logo Batata Recheada Monte" class="logo-img">
-                </div>
-                <button class="hamburger" onclick="toggleMobileMenu()">≡</button>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.ibb.co/MD2d4Rf7/LOGOMARCA-Rafaela-Oliveira-Store-2025.png" alt="Rafaela Oliveira Store" class="logo-img">
             </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#hero" onclick="closeMobileMenu()">Início</a></li>
-                <li><a href="#menu" onclick="closeMobileMenu()">Cardápio</a></li>
-                <li><a href="#bebidas" onclick="closeMobileMenu()">Bebidas</a></li>
-                <li><a href="#contact" onclick="closeMobileMenu()">Contato</a></li>
-            </ul>
-        </nav>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#categorias">Categorias</a></li>
+                    <li><a href="#novidades">Novidades</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <input type="search" placeholder="Buscar produtos..." class="search-input" aria-label="Buscar">
+                <button class="cart-btn" aria-label="Carrinho">🛒 <span class="cart-count">0</span></button>
+            </div>
+            <button class="menu-toggle" aria-label="Menu Mobile">☰</button>
+        </div>
     </header>
 
-    <section id="hero">
-        <div class="hero-content">
-            <h1>Bem-vindo(a) à Batata Recheada Monte</h1>
-            <p>Descubra sabores irresistíveis em Monte Carmelo, MG. Batatas recheadas artesanais, preparadas com ingredientes frescos e amor. Delivery disponível!</p>
-            <center>
-                <img src="https://i.ibb.co/DfMRR5hz/20251031-173449-1.jpg" alt="Batata Recheada Monte - Promoção Especial de Recheios Deliciosos" width="400" height="160">
-            </center>
-            <a href="#menu" class="btn">Ver Cardápio</a>
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-menu" id="close-menu" aria-label="Fechar Menu">&times;</button>
         </div>
-    </section>
-
-    <!-- CARDÁPIO -->
-    <section id="menu">
-        <h2>Nosso Cardápio de Batatas Recheadas</h2>
-        <div class="menu-grid">
-            <!-- ITEM 1 -->
-            <div class="menu-item">
-                <h3>Carne Seca ao Molho Branco</h3>
-                <img src="https://i.ibb.co/qMkNt06Q/20251031-155022.jpg" alt="Batata Recheada com Carne Seca ao Molho Branco" class="menu-img">
-                <p>Carne seca desfiada, molho branco cremoso, mussarela derretida, requeijão, bacon crocante e cebolinha. Perfeita para quem ama sabores intensos!</p>
-                <div class="size-options">
-                    <button class="size-btn" data-size="500g" data-price="34.00">500g - R$34,00</button>
-                    <button class="size-btn" data-size="750g" data-price="51.00">750g - R$51,00</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Carne Seca ao Molho Branco', this)">Adicionar ao Carrinho</button>
-            </div>
-
-            <!-- ITEM 2 -->
-            <div class="menu-item">
-                <h3>Bacon ao Molho Branco</h3>
-                <img src="https://i.ibb.co/S4RTd1QF/20251031-162528.jpg" alt="Batata Recheada com Bacon ao Molho Branco" class="menu-img">
-                <p>Bacon em cubos, molho branco artesanal, mussarela, requeijão cremoso e toque de cebolinha. Crocante e cremoso na medida certa!</p>
-                <div class="size-options">
-                    <button class="size-btn" data-size="500g" data-price="32.00">500g - R$32,00</button>
-                    <button class="size-btn" data-size="750g" data-price="48.00">750g - R$48,00</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Bacon ao Molho Branco', this)">Adicionar ao Carrinho</button>
-            </div>
-
-            <!-- ITEM 3 -->
-            <div class="menu-item">
-                <h3>Frango ao Molho Branco ou Sugo</h3>
-                <img src="https://i.ibb.co/NQYzmBv/20251031-162513.jpg" alt="Batata Recheada com Frango ao Molho Branco ou Sugo" class="menu-img">
-                <p>Frango suculento em cubos, escolha seu molho, mussarela, bacon, requeijão e finalização perfeita. Opção leve e saborosa!</p>
-                <div class="size-options">
-                    <button class="size-btn" data-size="500g" data-price="30.00">500g - R$30,00</button>
-                    <button class="size-btn" data-size="750g" data-price="45.00">750g - R$45,00</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Frango ao Molho Branco ou Sugo', this)">Adicionar ao Carrinho</button>
-            </div>
-
-            <!-- ITEM 4 -->
-            <div class="menu-item">
-                <h3>Calabresa ao Molho Branco e Sugo</h3>
-                <img src="https://i.ibb.co/5xJzc1Dg/20251031-162330.jpg" alt="Batata Recheada com Calabresa ao Molho Branco e Sugo" class="menu-img">
-                <p>Calabresa defumada, molho duplo, mussarela, bacon, requeijão e cebolinha picante. Picância e sabor em cada mordida!</p>
-                <div class="size-options">
-                    <button class="size-btn" data-size="500g" data-price="32.00">500g - R$32,00</button>
-                    <button class="size-btn" data-size="750g" data-price="48.00">750g - R$48,00</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Calabresa ao Molho Branco e Sugo', this)">Adicionar ao Carrinho</button>
-            </div>
-
-            <!-- ITEM 5 -->
-            <div class="menu-item">
-                <h3>Fraldinha ao Molho Sugo</h3>
-                <img src="https://i.ibb.co/Y4vMD3MM/20251031-162457.jpg" alt="Batata Recheada com Fraldinha ao Molho Sugo" class="menu-img">
-                <p>Costela desfiada ao molho sugo, mussarela derretida, requeijão, bacon e cebolinha. Sucesso garantido para os amantes de carne!</p>
-                <div class="size-options">
-                    <button class="size-btn" data-size="500g" data-price="34.00">500g - R$34,00</button>
-                    <button class="size-btn" data-size="750g" data-price="51.00">750g - R$51,00</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart('Fraldinha ao Molho Sugo', this)">Adicionar ao Carrinho</button>
-            </div>
+        <ul class="mobile-nav-list">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#novidades">Novidades</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <a href="#" class="btn-primary" id="mobile-cart-link">Meu Carrinho</a>
         </div>
-    </section>
-
-    <!-- BEBIDAS -->
-    <section id="bebidas">
-        <h2>Bebidas para Acompanhar</h2>
-        <div class="menu-grid">
-            <div class="menu-item">
-                <h3>Coca-Cola Lata</h3>
-                <img src="https://i.ibb.co/qf5F4vn/20251031-163500.jpg" alt="Coca-Cola Lata 350ml" class="menu-img">
-                <p>Refrigerante Coca-Cola 350ml gelado. O clássico para refrescar seu paladar!</p>
-                <button class="add-to-cart" onclick="addToCart('Coca-Cola Lata', null, 5.00)">Adicionar R$5,00</button>
-            </div>
-            <div class="menu-item">
-                <h3>Coca-Cola Lata Zero</h3>
-                <img src="https://i.ibb.co/FkS7brzJ/20251031-163524.jpg" alt="Coca-Cola Lata Zero 350ml" class="menu-img">
-                <p>Coca-Cola Zero 350ml sem açúcar. Sabor sem culpa!</p>
-                <button class="add-to-cart" onclick="addToCart('Coca-Cola Lata Zero', null, 5.00)">Adicionar R$5,00</button>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <div class="social-links">
-            <a href="https://wa.me/553499194464" target="_blank">📱 WhatsApp: (34) 9.9919-4464 - Peça Agora!</a>
-            <a href="https://www.instagram.com/batatarecheadamonte" target="_blank">📸 Siga no Instagram @batatarecheadamonte</a>
-        </div>
-        <p>Endereço: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG | &copy; 2025 Batata Recheada Monte. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- Carrinho Modal -->
-    <button id="cart-toggle" onclick="toggleCart()">
-        <span>🛒</span>
-        <span class="cart-count" id="cart-count">0</span>
-    </button>
-    <div id="cart">
-        <div class="cart-header">
-            <h3>Carrinho de Compras</h3>
-            <button onclick="toggleCart()" class="close-cart-header">×</button>
-        </div>
-        <div id="cart-items"></div>
-        <div id="delivery-line" class="cart-item" style="display: none;">
-            <span>Taxa de Entrega em Monte Carmelo</span><span>R$ 8,00</span>
-        </div>
-        <div id="cart-total" class="cart-total">Total: R$ 0,00</div>
-        <div class="delivery-options">
-            <h4>Opções de Entrega</h4>
-            <label><input type="radio" name="order-type" value="pickup" checked> Retirada no local: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG</label>
-            <label><input type="radio" name="order-type" value="delivery"> Entrega em Monte Carmelo (R$8,00)</label>
-        </div>
-        <div class="address-inputs" style="display: none;">
-            <h4>Endereço de Entrega em Monte Carmelo</h4>
-            <input type="text" id="customer-name" placeholder="Nome Completo">
-            <input type="text" id="street" placeholder="Rua/Avenida">
-            <input type="text" id="number" placeholder="Número">
-            <input type="text" id="neighborhood" placeholder="Bairro">
-        </div>
-        <div class="payment-options">
-            <h4>Método de Pagamento</h4>
-            <label><input type="radio" name="payment-type" value="dinheiro" checked onchange="toggleTrocoField()"> 💵 Dinheiro (troco disponível)</label>
-            <label><input type="radio" name="payment-type" value="cartao" onchange="toggleTrocoField()"> 💳 Cartão (Débito/Crédito)</label>
-            <label class="pix-label"><input type="radio" name="payment-type" value="pix" onchange="toggleTrocoField()"> 💰 Pix 
-                <span class="pix-key">Chave: 34999194464</span>
-                <button class="copy-pix-btn" onclick="copyPix()">📋 Copiar</button>
-            </label>
-            <div id="pix-qr-container" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 215, 0, 0.05); border-radius: 8px; text-align: center;">
-                <h5 style="color: var(--primary-gold); margin-bottom: 0.5rem;">Escaneie o QR Code para pagar via Pix</h5>
-                <div id="pix-qr" style="margin: 1rem auto; width: 200px; height: 200px;"></div>
-                <p id="pix-payload" style="font-family: monospace; font-size: 0.8rem; word-break: break-all; background: #000; color: #fff; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;"></p>
-                <button class="copy-payload-btn" onclick="copyPayload()">📋 Copiar Payload PIX</button>
-                <p>Valor: <span id="pix-amount" style="color: var(--primary-gold); font-weight: bold;"></span></p>
-            </div>
-            <div id="troco-field" class="troco-inputs" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 215, 0, 0.05); border-radius: 8px;">
-                <label>Troco para quanto? (R$)</label>
-                <input type="number" id="troco-value" placeholder="Ex: 50.00" step="0.01" min="0">
-            </div>
-        </div>
-        <button id="generate-pix-btn" style="display: none; margin: 1rem 0;" onclick="generatePixWithTotal()">Gerar PIX R$ 0,00</button>
-        <button id="checkout-btn" onclick="checkout()">Finalizar Pedido via WhatsApp</button>
     </div>
 
-    <!-- Overlay para carrinho -->
-    <div id="cart-overlay" class="overlay"></div>
+    <div id="cart-modal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Carrinho de Compras">
+            <div class="modal-header">
+                <h2>Seu Carrinho</h2>
+                <button class="close-modal" id="close-modal" aria-label="Fechar">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items"></div>
+            <div class="cart-total" id="cart-total"><strong>Total: R$ 0,00</strong></div>
+            <div class="cart-actions">
+                <button class="btn-secondary" id="clear-cart">Limpar Carrinho</button>
+                <button class="btn-primary" id="checkout">Finalizar via WhatsApp</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- Container para Notificações (Toasts) -->
-    <div id="toast-container"></div>
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="" class="slide-img">
+                <div class="slide-content">
+                    <h1>Moda Feminina Exclusiva</h1>
+                    <p>Eleve sua autoestima com estilo e bom gosto.</p>
+                    <a href="#categorias" class="btn-primary">Compre Agora</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="" class="slide-img">
+                <div class="slide-content">
+                    <h1>Conjuntos Perfeitos</h1>
+                    <p>Combine conforto e elegância no dia a dia.</p>
+                    <a href="#categorias" class="btn-primary">Ver Coleção</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="" class="slide-img">
+                <div class="slide-content">
+                    <h1>Vestidos Leves</h1>
+                    <p>Perfeitos para o verão com toque de sofisticação.</p>
+                    <a href="#categorias" class="btn-primary">Explorar</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <section id="categorias" class="categories">
+        <div class="container">
+            <h2>Categorias</h2>
+            <div class="category-grid">
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Blusas</h3></div>
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Bodys</h3></div>
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Conjuntos</h3></div>
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Vestidos</h3></div>
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Saias</h3></div>
+                <div class="category-card"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt=""><h3>Shorts</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="novidades" class="products">
+        <div class="container">
+            <h2>Novidades</h2>
+            <div class="product-grid">
+                <div class="product-card" data-product-id="1">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                    <h3>Blusa Floral</h3>
+                    <p>R$ 89,90</p>
+                    <div class="product-options">
+                        <label>Tamanho:</label>
+                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                        <label>Quantidade:</label>
+                        <input type="number" class="qty-input" value="1" min="1" max="10">
+                    </div>
+                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card" data-product-id="2">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                    <h3>Conjunto Short</h3>
+                    <p>R$ 129,90</p>
+                    <div class="product-options">
+                        <label>Tamanho:</label>
+                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                        <label>Quantidade:</label>
+                        <input type="number" class="qty-input" value="1" min="1" max="10">
+                    </div>
+                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card" data-product-id="3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                    <h3>Vestido Verão</h3>
+                    <p>R$ 99,90</p>
+                    <div class="product-options">
+                        <label>Tamanho:</label>
+                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                        <label>Quantidade:</label>
+                        <input type="number" class="qty-input" value="1" min="1" max="10">
+                    </div>
+                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card" data-product-id="4">
+                    <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
+                    <h3>Saia Midi</h3>
+                    <p>R$ 79,90</p>
+                    <div class="product-options">
+                        <label>Tamanho:</label>
+                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                        <label>Quantidade:</label>
+                        <input type="number" class="qty-input" value="1" min="1" max="10">
+                    </div>
+                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <p>A Rafaela Oliveira Store é especializada em moda feminina. Reforma em 2025 para melhor experiência de compra!</p>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Receba Dicas e Ofertas</h2>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu e-mail" required>
+                <button type="submit" class="btn-primary">Inscrever-se</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="contato" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h3>Rafaela Oliveira Store</h3><p>Moda feminina com estilo e confiança.</p></div>
+                <div class="footer-section"><h4>Categorias</h4><ul><li><a href="#categorias">Blusas</a></li><li><a href="#categorias">Conjuntos</a></li><li><a href="#categorias">Vestidos</a></li><li><a href="#categorias">Saias</a></li></ul></div>
+                <div class="footer-section"><h4>Contato</h4><p>Email: contato@rafaelaoliveirastore.com.br</p><p>Tel: (11) 99999-9999</p><p>WhatsApp: <a href="https://wa.me/5534999194464" style="color: #25D366;">+55 34 99919-4464</a></p></div>
+                <div class="footer-section"><h4>Siga-nos</h4><div class="social-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="https://wa.me/5534999194464">WhatsApp</a></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Rafaela Oliveira Store. Todos os direitos reservados.</p></div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
-
 </html>

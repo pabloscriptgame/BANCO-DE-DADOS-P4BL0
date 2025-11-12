@@ -1,385 +1,262 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const pixCopyKey = '34999194464'; // Para cópia simples
-const pixPayloadKey = '+553499194464'; // Formato completo para payload PIX (telefone internacional)
+// Versão corrigida e mais robusta do script.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicialização do Carrinho (persistência local)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function showToast(message, type = 'success') {
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.classList.add('toast', type);
-    toast.textContent = message;
-    container.appendChild(toast);
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileCartLink = document.getElementById('mobile-cart-link');
 
-    // Mostra o toast
-    setTimeout(() => toast.classList.add('show'), 100);
-
-    // Remove após 3 segundos
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => container.removeChild(toast), 300);
-    }, 3000);
-}
-
-function copyPix() {
-    navigator.clipboard.writeText(pixCopyKey).then(() => {
-        showToast('Chave PIX copiada com sucesso!', 'success');
-    }).catch(() => {
-        showToast('Erro ao copiar chave PIX. Tente novamente.', 'error');
-    });
-}
-
-// Função para copiar o payload PIX
-function copyPayload() {
-    const payloadEl = document.getElementById('pix-payload');
-    if (payloadEl && payloadEl.textContent) {
-        navigator.clipboard.writeText(payloadEl.textContent).then(() => {
-            showToast('Payload PIX copiado com sucesso! Cole no app do banco.', 'success');
-        }).catch(() => {
-            showToast('Erro ao copiar payload PIX. Tente novamente.', 'error');
-        });
-    } else {
-        showToast('Payload não disponível. Gere o PIX primeiro.', 'error');
-    }
-}
-
-// Nova função para gerar PIX com total somado certinho
-function generatePixWithTotal() {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const orderType = document.querySelector('input[name="order-type"]:checked').value;
-    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
-    const total = subtotal + deliveryFee;
-
-    if (total === 0) {
-        showToast('Adicione itens ao carrinho para gerar o PIX!', 'error');
-        return;
-    }
-
-    // Atualiza o texto do botão com o total certinho
-    document.getElementById('generate-pix-btn').textContent = `Gerar PIX R$ ${total.toFixed(2).replace('.', ',')}`;
-
-    // Gera o QR e payload
-    generatePixQR(total);
-    showToast(`PIX gerado com valor total R$ ${total.toFixed(2).replace('.', ',')} !`, 'success');
-}
-
-// Funções PIX
-function calculateCRC16(message) {
-    let crc = 0xFFFF;
-    const poly = 0x1021;
-    for (let i = 0; i < message.length; i++) {
-        crc ^= (message.charCodeAt(i) << 8);
-        for (let j = 0; j < 8; j++) {
-            if ((crc & 0x8000) !== 0) {
-                crc = ((crc << 1) & 0xFFFF) ^ poly;
-            } else {
-                crc = (crc << 1) & 0xFFFF;
-            }
-        }
-    }
-    return crc.toString(16).toUpperCase().padStart(4, '0');
-}
-
-function generatePixPayload(amount) {
-    const merchantName = 'Batata Recheada Monte';
-    const merchantCity = 'Monte Carmelo';
-    let payload = '000201';
-    payload += '010212';
-    payload += `26${(13 + 'BR.GOV.BCB.PIX01' + pixPayloadKey.length).toString().length}${13}BR.GOV.BCB.PIX01${pixPayloadKey.length}${pixPayloadKey}`;
-    payload += '52040000';
-    payload += '5303BRL';
-    const amountCents = Math.round(amount * 100).toString();
-    payload += `54${amountCents.length}${amountCents}`;
-    payload += '5802BR';
-    payload += `59${merchantName.length}${merchantName}`;
-    payload += `60${merchantCity.length}${merchantCity}`;
-    const crcString = payload + '6304';
-    const checksum = calculateCRC16(crcString);
-    payload += `6304${checksum}`;
-    return payload;
-}
-
-function generatePixQR(total) {
-    const container = document.getElementById('pix-qr-container');
-    const qrElement = document.getElementById('pix-qr');
-    const payloadEl = document.getElementById('pix-payload');
-    const amountEl = document.getElementById('pix-amount');
-    if (!container || !QRCode) return; // Verifica se a lib está carregada
-
-    const payload = generatePixPayload(total);
-    payloadEl.textContent = payload;
-    amountEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-
-    // Limpa QR anterior
-    qrElement.innerHTML = '';
-
-    // Gera novo QR
-    new QRCode(qrElement, {
-        text: payload,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-}
-
-function addToCart(itemName, button, fixedPrice = null) {
-    const sizeButtons = button ? button.parentElement.querySelectorAll('.size-btn') : null;
-    let selectedSize = 'Padrão'; // Default para itens sem tamanho
-    let price = fixedPrice || 0;
-
-    if (sizeButtons) {
-        const selectedBtn = Array.from(sizeButtons).find(btn => btn.classList.contains('selected'));
-        if (!selectedBtn) {
-            showToast('Por favor, selecione um tamanho antes de adicionar ao carrinho!', 'error');
-            return;
-        }
-        selectedSize = selectedBtn.dataset.size;
-        price = parseFloat(selectedBtn.dataset.price);
-    }
-
-    // Verifica se o item já existe no carrinho (mesmo nome e tamanho)
-    const existingItemIndex = cart.findIndex(item => item.name === itemName && item.size === selectedSize);
-    if (existingItemIndex !== -1) {
-        // Incrementa a quantidade
-        cart[existingItemIndex].quantity += 1;
-        showToast(`${itemName} ${selectedSize} (quantidade atualizada para ${cart[existingItemIndex].quantity})!`, 'success');
-    } else {
-        // Adiciona novo item com quantidade 1
-        cart.push({ name: itemName, size: selectedSize, price: price, quantity: 1 });
-        showToast(`${itemName} ${selectedSize} adicionado ao carrinho!`, 'success');
-    }
-
-    updateCart();
-    if (sizeButtons) {
-        sizeButtons.forEach(btn => btn.classList.remove('selected'));
-        selectedBtn.classList.add('selected');
-    }
-}
-
-function updateQuantity(index, delta) {
-    cart[index].quantity += delta;
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1); // Remove se quantidade for 0 ou negativa
-    }
-    updateCart();
-}
-
-function removeFromCart(index) {
-    if (confirm('Tem certeza que deseja remover este item do carrinho?')) {
-        cart.splice(index, 1);
-        updateCart();
-        showToast('Item removido do carrinho com sucesso!', 'success');
-    }
-}
-
-function toggleTrocoField() {
-    const paymentType = document.querySelector('input[name="payment-type"]:checked').value;
-    const trocoField = document.getElementById('troco-field');
-    if (paymentType === 'dinheiro') {
-        trocoField.style.display = 'block';
-    } else {
-        trocoField.style.display = 'none';
-        document.getElementById('troco-value').value = '';
-    }
-}
-
-function updateCart() {
+    const cartBtn = document.querySelector('.cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const closeModal = document.getElementById('close-modal');
     const cartItems = document.getElementById('cart-items');
-    const totalEl = document.getElementById('cart-total');
-    const cartCount = document.getElementById('cart-count');
-    cartItems.innerHTML = '';
-    let subtotal = 0;
+    const cartTotal = document.getElementById('cart-total');
+    const clearCart = document.getElementById('clear-cart');
+    const checkout = document.getElementById('checkout');
 
-    cart.forEach((item, index) => {
-        const itemSubtotal = item.price * item.quantity;
-        subtotal += itemSubtotal;
+    updateCartCount();
+    updateCartDisplay();
 
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-            <div class="item-info">
-                <span class="item-name">${item.name}</span>
-                <span class="item-size">(${item.size})</span>
-                <div class="quantity-controls">
-                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
-                    <span class="qty-display">${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-                </div>
-            </div>
-            <div class="item-price">
-                <span class="item-subtotal">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</span>
-                <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>
-            </div>
-        `;
-        cartItems.appendChild(div);
-    });
-
-    // Salva no localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Lógica para taxa de entrega/retirada
-    const orderType = document.querySelector('input[name="order-type"]:checked').value;
-    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
-    const deliveryLine = document.getElementById('delivery-line');
-    if (orderType === 'delivery') {
-        deliveryLine.style.display = 'flex';
-    } else {
-        deliveryLine.style.display = 'none';
+    // Mobile menu open/close
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+        });
+    }
+    if (closeMenu && mobileMenu) {
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+    }
+    // Close when clicking backdrop of mobile menu
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+        mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
+    }
+    // Mobile "Meu Carrinho" link
+    if (mobileCartLink) {
+        mobileCartLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileMenu.classList.remove('active');
+            openCartModal();
+        });
     }
 
-    const total = subtotal + deliveryFee;
-    totalEl.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    // Atualiza o botão de gerar PIX se PIX estiver selecionado
-    const paymentType = document.querySelector('input[name="payment-type"]:checked') ? .value;
-    const generatePixBtn = document.getElementById('generate-pix-btn');
-    const pixContainer = document.getElementById('pix-qr-container');
-    if (paymentType === 'pix') {
-        pixContainer.style.display = 'block';
-        generatePixBtn.style.display = 'block';
-        generatePixBtn.textContent = `Gerar PIX R$ ${total.toFixed(2).replace('.', ',')}`;
-        generatePixQR(total); // Gera automaticamente ao selecionar PIX
-    } else {
-        pixContainer.style.display = 'none';
-        generatePixBtn.style.display = 'none';
+    // Slider (só roda se existir slides)
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function nextSlide() {
+        if (slides.length === 0) return;
+        slides.forEach(s => s.classList.remove('active'));
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
     }
-}
-
-function toggleCart() {
-    const cartEl = document.getElementById('cart');
-    const overlay = document.getElementById('cart-overlay');
-    cartEl.classList.toggle('open');
-    overlay.classList.toggle('show');
-}
-
-function checkout() {
-    if (cart.length === 0) {
-        showToast('Seu carrinho está vazio! Adicione itens para continuar.', 'error');
-        return;
+    if (slides.length > 1) {
+        setInterval(nextSlide, 5000);
     }
 
-    const orderType = document.querySelector('input[name="order-type"]:checked').value;
-    const paymentType = document.querySelector('input[name="payment-type"]:checked').value;
-
-    if (orderType === 'delivery') {
-        const customerName = document.getElementById('customer-name').value.trim();
-        const street = document.getElementById('street').value.trim();
-        const number = document.getElementById('number').value.trim();
-        const neighborhood = document.getElementById('neighborhood').value.trim();
-        if (!customerName || !street || !number || !neighborhood) {
-            showToast('Preencha todos os campos de endereço para entrega em Monte Carmelo!', 'error');
-            return;
-        }
-    }
-
-    let message = 'Olá! Gostaria de fazer um pedido na Batata Recheada Monte:\n\n';
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        message += `- ${item.name} (${item.size || ''}) x${item.quantity} - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
-    });
-
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const deliveryFee = orderType === 'delivery' ? 8.00 : 0.00;
-    const total = subtotal + deliveryFee;
-    message += `\nSubtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
-    message += `Taxa de Entrega: R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
-    message += `Total a Pagar: R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
-
-    if (orderType === 'pickup') {
-        message += `Tipo de Pedido: Retirada no local\nEndereço: Rua Marajó N: 908, Bairro: Lagoinha, Monte Carmelo - MG\n\n`;
-    } else {
-        const customerName = document.getElementById('customer-name').value;
-        const street = document.getElementById('street').value;
-        const number = document.getElementById('number').value;
-        const neighborhood = document.getElementById('neighborhood').value;
-        message += `Tipo de Pedido: Entrega\nEndereço:\nNome: ${customerName}\n${street}, ${number} - ${neighborhood}, Monte Carmelo - MG\n\n`;
-    }
-
-    let paymentText = '';
-    if (paymentType === 'dinheiro') {
-        const trocoValue = document.getElementById('troco-value').value;
-        paymentText = `Método de Pagamento: Dinheiro (troco disponível)`;
-        if (trocoValue) {
-            paymentText += `\nTroco para: R$ ${parseFloat(trocoValue).toFixed(2).replace('.', ',')}`;
-        }
-        paymentText += `\n`;
-    } else if (paymentType === 'cartao') {
-        paymentText = 'Método de Pagamento: Cartão (Débito/Crédito)\n';
-    } else if (paymentType === 'pix') {
-        const payload = generatePixPayload(total);
-        paymentText = `Método de Pagamento: Pix\nChave: ${pixCopyKey}\nPayload PIX (copia e cole no app):\n${payload}\n\nOu escaneie o QR Code no site para pagar instantaneamente.`;
-    }
-    message += paymentText;
-
-    message += 'Aguardo confirmação do pedido! 😊';
-
-    const whatsappUrl = `https://wa.me/553499194464?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    showToast('Pedido enviado para o WhatsApp! Em breve entraremos em contato.', 'success');
-    cart = []; // Limpa carrinho após envio
-    localStorage.removeItem('cart'); // Remove do localStorage
-    updateCart();
-    toggleCart();
-}
-
-// Funções para Menu Mobile
-function toggleMobileMenu() {
-    const navLinks = document.getElementById('nav-links');
-    navLinks.classList.toggle('active');
-}
-
-function closeMobileMenu() {
-    const navLinks = document.getElementById('nav-links');
-    navLinks.classList.remove('active');
-}
-
-// Seleção de tamanho
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('size-btn')) {
-        e.target.parentElement.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
-        e.target.classList.add('selected');
-    }
-});
-
-// Listener para mudança nas opções de entrega/retirada
-document.addEventListener('change', function(e) {
-    if (e.target.name === 'order-type') {
-        const addressInputs = document.querySelector('.address-inputs');
-        if (e.target.value === 'delivery') {
-            addressInputs.style.display = 'block';
-            document.getElementById('delivery-line').style.display = 'flex';
-        } else {
-            addressInputs.style.display = 'none';
-            document.getElementById('delivery-line').style.display = 'none';
-        }
-        updateCart();
-    }
-});
-
-// Listener para toggle troco e PIX no pagamento
-document.addEventListener('change', function(e) {
-    if (e.target.name === 'payment-type') {
-        toggleTrocoField();
-        updateCart(); // Chama updateCart para gerenciar o botão PIX
-    }
-});
-
-// Scroll suave para links de navegação
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+    // Smooth scroll: ignora links que tenham apenas "#" para não quebrar
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
-});
 
-// Fechar carrinho ao clicar no overlay
-document.getElementById('cart-overlay').addEventListener('click', toggleCart);
+    // Newsletter simples
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Inscrito com sucesso! Receba novidades no seu e-mail.');
+            newsletterForm.reset();
+        });
+    }
 
-// Inicializa o carrinho ao carregar a página
-document.addEventListener('DOMContentLoaded', function() {
-    updateCart();
-    toggleTrocoField(); // Inicializa o campo de troco
+    // Abre modal do carrinho
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            openCartModal();
+        });
+    }
+    if (modalOverlay) modalOverlay.addEventListener('click', closeCartModal);
+    if (closeModal) closeModal.addEventListener('click', closeCartModal);
+
+    function openCartModal() {
+        if (!cartModal) return;
+        cartModal.classList.add('active');
+        cartModal.setAttribute('aria-hidden', 'false');
+        updateCartDisplay();
+    }
+    function closeCartModal() {
+        if (!cartModal) return;
+        cartModal.classList.remove('active');
+        cartModal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Adicionar ao carrinho
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const productCard = e.target.closest('.product-card');
+            if (!productCard) return;
+            const id = productCard.dataset.productId;
+            const name = productCard.querySelector('h3') ? productCard.querySelector('h3').textContent : 'Produto';
+            const priceText = productCard.querySelector('p') ? productCard.querySelector('p').textContent : 'R$ 0,00';
+            const price = parseFloat(priceText.replace('R$','').replace(/\./g,'').replace(',','.')) || 0;
+            const sizeEl = productCard.querySelector('.size-select');
+            const size = sizeEl ? sizeEl.value : '';
+            const qtyEl = productCard.querySelector('.qty-input');
+            const quantity = qtyEl ? Math.max(1, parseInt(qtyEl.value) || 1) : 1;
+
+            const itemKey = `${id}-${size}`;
+
+            const existingIndex = cart.findIndex(ci => ci.key === itemKey);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += quantity;
+            } else {
+                cart.push({ key: itemKey, id, name, price, size, quantity });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartDisplay();
+
+            // feedback curto
+            alert(`${quantity}x ${name} (Tamanho ${size}) adicionado ao carrinho!`);
+
+            if (qtyEl) qtyEl.value = 1;
+        });
+    });
+
+    function updateCartCount() {
+        const totalItems = cart.reduce((s, it) => s + (it.quantity || 0), 0);
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) cartCount.textContent = totalItems;
+    }
+
+    // Atualiza lista do modal sem usar "onclick" inline
+    function updateCartDisplay() {
+        if (!cartItems || !cartTotal) return;
+        cartItems.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p style="text-align: center; color: #999;">Seu carrinho está vazio.</p>';
+        } else {
+            cart.forEach((item, index) => {
+                const itemTotal = (item.price || 0) * item.quantity;
+                total += itemTotal;
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <strong>${item.name}</strong><br>
+                        Tamanho: ${item.size} | R$ ${Number(item.price).toFixed(2)}<br>
+                        <small>Subtotal: R$ ${itemTotal.toFixed(2)}</small>
+                    </div>
+                    <div class="cart-item-controls">
+                        <div class="qty-controls" data-index="${index}">
+                            <button class="qty-btn qty-decrease" aria-label="Diminuir quantidade">-</button>
+                            <span class="qty-value">${item.quantity}</span>
+                            <button class="qty-btn qty-increase" aria-label="Aumentar quantidade">+</button>
+                        </div>
+                        <button class="remove-item remove-btn" data-index="${index}">Remover</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+            });
+
+            // Attach listeners AFTER elements are in DOM
+            cartItems.querySelectorAll('.qty-decrease').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.target.closest('.qty-controls').dataset.index);
+                    updateQuantity(idx, -1);
+                });
+            });
+            cartItems.querySelectorAll('.qty-increase').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.target.closest('.qty-controls').dataset.index);
+                    updateQuantity(idx, 1);
+                });
+            });
+            cartItems.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.target.dataset.index);
+                    removeItem(idx);
+                });
+            });
+        }
+        cartTotal.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
+    }
+
+    function updateQuantity(index, change) {
+        if (!cart[index]) return;
+        const newQty = cart[index].quantity + change;
+        if (newQty <= 0) return;
+        cart[index].quantity = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartDisplay();
+    }
+
+    function removeItem(index) {
+        if (!cart[index]) return;
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartDisplay();
+        // feedback curto
+        alert('Item removido do carrinho!');
+    }
+
+    if (clearCart) {
+        clearCart.addEventListener('click', () => {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartDisplay();
+            alert('Carrinho limpo!');
+        });
+    }
+
+    if (checkout) {
+        checkout.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+            const total = cart.reduce((s,i) => s + (i.price * i.quantity), 0);
+            const itemsList = cart.map(i => `${i.name} (Tamanho ${i.size}) x${i.quantity} - R$ ${(i.price * i.quantity).toFixed(2)}`).join('\n');
+            const message = `Olá! Gostaria de finalizar uma compra na Rafaela Oliveira Store.\n\nItens:\n${itemsList}\n\nTotal: R$ ${total.toFixed(2)}\n\nPor favor, confirme o pedido e formas de pagamento/entrega.`;
+            const whatsappUrl = `https://wa.me/5534999194464?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeCartModal();
+        });
+    }
+
+    // Mantém estilo do header ao rolar
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (!header) return;
+        if (window.scrollY > 100) header.style.background = 'rgba(255,255,255,0.95)';
+        else header.style.background = '#fff';
+    });
+
 });
