@@ -42,9 +42,18 @@ body {
     width: 100%;
 }
 
+.logo {
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
 .logo-img {
-    height: 40px;
+    height: 50px;
     width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .nav-list {
@@ -76,6 +85,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 20px;
     width: 200px;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #e91e63;
+    outline: none;
 }
 
 .cart-btn {
@@ -85,6 +100,11 @@ body {
     cursor: pointer;
     position: relative;
     padding: 5px;
+    transition: color 0.3s;
+}
+
+.cart-btn:hover {
+    color: #e91e63;
 }
 
 .cart-count {
@@ -284,6 +304,11 @@ body {
     border-radius: 50%;
     cursor: pointer;
     font-size: 16px;
+    transition: background 0.3s;
+}
+
+.qty-btn:hover {
+    background: #bbb;
 }
 
 .remove-item {
@@ -293,6 +318,11 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s;
+}
+
+.remove-item:hover {
+    background: #c2185b;
 }
 
 .cart-item:last-child {
@@ -512,6 +542,11 @@ h2 {
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover img {
+    transform: scale(1.02);
 }
 
 .product-card h3 {
@@ -581,6 +616,12 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 25px;
     min-width: 200px;
+    transition: border-color 0.3s;
+}
+
+.newsletter-form input:focus {
+    border-color: #e91e63;
+    outline: none;
 }
 
 
