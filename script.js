@@ -1,285 +1,170 @@
-// Versão corrigida e mais robusta do script.js
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicialização do Carrinho (persistência local)
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// Animações AOS
+AOS.init({ duration: 1200 });
 
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeMenu = document.getElementById('close-menu');
-    const mobileCartLink = document.getElementById('mobile-cart-link');
-
-    const cartBtn = document.querySelector('.cart-btn');
-    const cartModal = document.getElementById('cart-modal');
-    const modalOverlay = document.getElementById('modal-overlay');
-    const closeModal = document.getElementById('close-modal');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const clearCart = document.getElementById('clear-cart');
-    const checkout = document.getElementById('checkout');
-
-    updateCartCount();
-    updateCartDisplay();
-
-    // Mobile menu open/close
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            mobileMenu.setAttribute('aria-hidden', 'false');
-        });
-    }
-    if (closeMenu && mobileMenu) {
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-        });
-    }
-    // Close when clicking backdrop of mobile menu
-    if (mobileMenu) {
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.remove('active');
-                mobileMenu.setAttribute('aria-hidden', 'true');
-            }
-        });
-        mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenu.setAttribute('aria-hidden', 'true');
-            });
-        });
-    }
-    // Mobile "Meu Carrinho" link
-    if (mobileCartLink) {
-        mobileCartLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            mobileMenu.classList.remove('active');
-            openCartModal();
-        });
-    }
-
-    // Slider (só roda se existir slides)
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function nextSlide() {
-        if (slides.length === 0) return;
-        slides.forEach(s => s.classList.remove('active'));
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }
-    if (slides.length > 1) {
-        setInterval(nextSlide, 5000);
-    }
-
-    // Smooth scroll: ignora links que tenham apenas "#" para não quebrar
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Newsletter simples
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Inscrito com sucesso! Receba novidades no seu e-mail.');
-            newsletterForm.reset();
-        });
-    }
-
-    // Abre modal do carrinho
-    if (cartBtn) {
-        cartBtn.addEventListener('click', () => {
-            openCartModal();
-        });
-    }
-    if (modalOverlay) modalOverlay.addEventListener('click', closeCartModal);
-    if (closeModal) closeModal.addEventListener('click', closeCartModal);
-
-    function openCartModal() {
-        if (!cartModal) return;
-        cartModal.classList.add('active');
-        cartModal.setAttribute('aria-hidden', 'false');
-        updateCartDisplay();
-    }
-
-    function closeCartModal() {
-        if (!cartModal) return;
-        cartModal.classList.remove('active');
-        cartModal.setAttribute('aria-hidden', 'true');
-    }
-
-    // Adicionar ao carrinho
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const productCard = e.target.closest('.product-card');
-            if (!productCard) return;
-            const id = productCard.dataset.productId;
-            const name = productCard.querySelector('h3') ? productCard.querySelector('h3').textContent : 'Produto';
-            const priceText = productCard.querySelector('p') ? productCard.querySelector('p').textContent : 'R$ 0,00';
-            const price = parseFloat(priceText.replace('R$', '').replace(/\./g, '').replace(',', '.')) || 0;
-            const sizeEl = productCard.querySelector('.size-select');
-            const size = sizeEl ? sizeEl.value : '';
-            const qtyEl = productCard.querySelector('.qty-input');
-            const quantity = qtyEl ? Math.max(1, parseInt(qtyEl.value) || 1) : 1;
-
-            const itemKey = `${id}-${size}`;
-
-            const existingIndex = cart.findIndex(ci => ci.key === itemKey);
-            if (existingIndex > -1) {
-                cart[existingIndex].quantity += quantity;
-            } else {
-                cart.push({ key: itemKey, id, name, price, size, quantity });
-            }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            updateCartDisplay();
-
-            // feedback curto
-            alert(`${quantity}x ${name} (Tamanho ${size}) adicionado ao carrinho!`);
-
-            if (qtyEl) qtyEl.value = 1;
-        });
-    });
-
-    function updateCartCount() {
-        const totalItems = cart.reduce((s, it) => s + (it.quantity || 0), 0);
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) cartCount.textContent = totalItems;
-    }
-
-    // Atualiza lista do modal sem usar "onclick" inline
-    function updateCartDisplay() {
-        if (!cartItems || !cartTotal) return;
-        cartItems.innerHTML = '';
-        let total = 0;
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<p style="text-align: center; color: #999;">Seu carrinho está vazio.</p>';
-        } else {
-            cart.forEach((item, index) => {
-                const itemTotal = (item.price || 0) * item.quantity;
-                total += itemTotal;
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
-                itemElement.innerHTML = `
-                    <div class="cart-item-info">
-                        <strong>${item.name}</strong><br>
-                        Tamanho: ${item.size} | R$ ${Number(item.price).toFixed(2)}<br>
-                        <small>Subtotal: R$ ${itemTotal.toFixed(2)}</small>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="qty-controls" data-index="${index}">
-                            <button class="qty-btn qty-decrease" aria-label="Diminuir quantidade">-</button>
-                            <span class="qty-value">${item.quantity}</span>
-                            <button class="qty-btn qty-increase" aria-label="Aumentar quantidade">+</button>
-                        </div>
-                        <button class="remove-item remove-btn" data-index="${index}">Remover</button>
-                    </div>
-                `;
-                cartItems.appendChild(itemElement);
-            });
-
-            // Attach listeners AFTER elements are in DOM
-            cartItems.querySelectorAll('.qty-decrease').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idx = parseInt(e.target.closest('.qty-controls').dataset.index);
-                    updateQuantity(idx, -1);
-                });
-            });
-            cartItems.querySelectorAll('.qty-increase').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idx = parseInt(e.target.closest('.qty-controls').dataset.index);
-                    updateQuantity(idx, 1);
-                });
-            });
-            cartItems.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idx = parseInt(e.target.dataset.index);
-                    removeItem(idx);
-                });
-            });
-        }
-        cartTotal.innerHTML = `<strong>Total: R$ ${total.toFixed(2)}</strong>`;
-    }
-
-    function updateQuantity(index, change) {
-        if (!cart[index]) return;
-        const newQty = cart[index].quantity + change;
-        if (newQty <= 0) return;
-        cart[index].quantity = newQty;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        updateCartDisplay();
-    }
-
-    function removeItem(index) {
-        if (!cart[index]) return;
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        updateCartDisplay();
-        // feedback curto
-        alert('Item removido do carrinho!');
-    }
-
-    if (clearCart) {
-        clearCart.addEventListener('click', () => {
-            cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            updateCartDisplay();
-            alert('Carrinho limpo!');
-        });
-    }
-
-    if (checkout) {
-        checkout.addEventListener('click', () => {
-            if (cart.length === 0) {
-                alert('Seu carrinho está vazio!');
-                return;
-            }
-            const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-            const itemsList = cart.map(i => `${i.name} (Tamanho ${i.size}) x${i.quantity} - R$ ${(i.price * i.quantity).toFixed(2)}`).join('\n');
-            const message = `Olá! Gostaria de finalizar uma compra na Rafaela Oliveira Store.\n\nItens:\n${itemsList}\n\nTotal: R$ ${total.toFixed(2)}\n\nPor favor, confirme o pedido e formas de pagamento/entrega.`;
-            const whatsappUrl = `https://wa.me/5534999194464?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            closeCartModal();
-        });
-    }
-
-    // Mantém estilo do header ao rolar
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('.header');
-        if (!header) return;
-        if (window.scrollY > 100) header.style.background = 'rgba(255,255,255,0.95)';
-        else header.style.background = '#fff';
-    });
-
-    // Tab functionality
-    const tabButtons = document.querySelectorAll('.tab-button');
-    if (tabButtons.length > 0) {
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.dataset.target;
-                // Remove active from all buttons
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                // Remove active from all contents
-                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                // Add active to clicked
-                button.classList.add('active');
-                // Add active to target content
-                const targetContent = document.querySelector(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-            });
-        });
-    }
-
+// Menu Hamburger
+document.querySelector('.hamburger').addEventListener('click', () => {
+    document.querySelector('.nav').classList.toggle('active');
 });
+
+// Modo Claro/Escuro
+document.querySelector('.toggle').addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const toggleIcon = document.querySelector('.toggle i');
+    if (document.body.classList.contains('light')) {
+        toggleIcon.classList.remove('fa-sun');
+        toggleIcon.classList.add('fa-moon');
+    } else {
+        toggleIcon.classList.remove('fa-moon');
+        toggleIcon.classList.add('fa-sun');
+    }
+});
+
+// Scroll Suave
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (window.innerWidth <= 768) {
+            document.querySelector('.nav').classList.remove('active');
+        }
+    });
+});
+
+// Gerador IA Melhorado
+document.getElementById('generateIA').addEventListener('click', async() => {
+    let prompt = document.getElementById('promptIA').value.trim();
+    if (!prompt) return alert('Digite um prompt detalhado pra gerar uma imagem top!');
+
+    document.getElementById('loadingIA').style.display = 'block';
+    document.getElementById('generatedIA').style.display = 'none';
+
+    try {
+        prompt = prompt + " , 3D neon cyan metallic glowing trap style, dark background, professional logo, high detail, futuristic, ultra sharp, cinematic lighting";
+        const img = await puter.ai.txt2img(prompt, { quality: "high" });
+        document.getElementById('generatedIA').src = img.src;
+        document.getElementById('generatedIA').style.display = 'block';
+    } catch (err) {
+        alert('Erro ao gerar. Verifique conexão ou tente prompt mais simples!');
+    } finally {
+        document.getElementById('loadingIA').style.display = 'none';
+    }
+});
+
+// Portfólio
+const portfolioImages = [
+    { src: "https://i.ibb.co/XRrVpch/logo-segura.png", cat: "logos" },
+    { src: "https://i.ibb.co/DPDZb4W1/Gemini-Generated-Image-40opkn40opkn40op-Photoroom.png", cat: "logos" },
+    { src: "https://i.ibb.co/KjXYTnyh/20251013-131541.png", cat: "logos" },
+    { src: "https://i.ibb.co/ksq33qGv/20250911-135505.png", cat: "logos" },
+    { src: "https://i.ibb.co/1GVPXDrS/20251022-124747.png", cat: "logos" },
+    { src: "https://i.ibb.co/MD2d4Rf7/LOGOMARCA-Rafaela-Oliveira-Store-2025.png", cat: "logos" },
+    { src: "https://i.ibb.co/cSj7z7fs/480470cba7087d7de97fd77cfe2d62c0-high.webp", cat: "logos" },
+    { src: "https://assets.justinmind.com/wp-content/uploads/2020/02/website-mockup-examples-travel.png", cat: "sites" },
+    { src: "https://assets.justinmind.com/wp-content/uploads/2020/02/free-website-mockups-lawyer.png", cat: "sites" },
+    { src: "https://mockuptree.com/wp-content/uploads/2020/07/free-website-mockup-3d-perspective.jpg", cat: "sites" }
+];
+
+const gallery = document.getElementById('gallery');
+portfolioImages.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'item ' + item.cat;
+    div.innerHTML = `<img src="${item.src}" alt="Trabalho Pablo Designer Monte Carmelo MG">`;
+    div.onclick = () => {
+        document.getElementById('lightbox-img').src = item.src;
+        document.getElementById('lightbox').style.display = 'flex';
+    };
+    gallery.appendChild(div);
+});
+
+// Filtros Portfólio
+document.querySelectorAll('.filters button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.gallery .item').forEach(item => {
+            if (filter === 'all' || item.classList.contains(filter)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Lightbox
+document.querySelector('.close-lightbox').onclick = () => {
+    document.getElementById('lightbox').style.display = 'none';
+};
+
+// Chat IA Inteligente
+const chatBody = document.getElementById('chatBody');
+
+function addMsg(text, isUser = false) {
+    const p = document.createElement('p');
+    p.innerHTML = text;
+    p.classList.add(isUser ? 'user-msg' : 'ai-msg');
+    chatBody.appendChild(p);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+document.getElementById('sendMsg').onclick = sendChat;
+document.getElementById('chatMsg').addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendChat();
+});
+
+async function sendChat() {
+    const input = document.getElementById('chatMsg');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    addMsg('Você: ' + msg, true);
+    input.value = '';
+
+    const lower = msg.toLowerCase();
+
+    if (lower.includes('gerar') || lower.includes('imagem') || lower.includes('logo') || lower.includes('criar') || lower.includes('fazer') || lower.includes('desenhar')) {
+        addMsg('IA: Gerando uma imagem incrível pra você... Aguenta aí! 🔥', false);
+        try {
+            let clean = msg.replace(/gerar|imagem|logo|ia|criar|fazer|por favor|please/gi, '').trim() || 'Logo 3D neon cyan metálico trap glowing';
+            clean += " , 3D neon glowing cyan metallic trap style logo, dark background, high detail, professional, futuristic, ultra sharp";
+            const img = await puter.ai.txt2img(clean, { quality: "high" });
+            const el = document.createElement('img');
+            el.src = img.src;
+            el.style.maxWidth = '100%';
+            el.style.borderRadius = '20px';
+            el.style.marginTop = '15px';
+            el.style.boxShadow = 'var(--neon)';
+            chatBody.appendChild(el);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        } catch (err) {
+            addMsg('IA: Ops, erro ao gerar. Tenta de novo ou descreve melhor!', false);
+        }
+    } else if (lower.includes('orçamento') || lower.includes('preço') || lower.includes('valor') || lower.includes('quanto')) {
+        addMsg('IA: Orçamentos variam conforme complexidade. Me chama no WhatsApp (34) 99811-0946 que eu te passo o valor certinho rapidinho! 🚀', false);
+    } else if (lower.includes('monte carmelo') || lower.includes('mg') || lower.includes('minas')) {
+        addMsg('IA: Sou de <strong>Monte Carmelo - MG</strong>! Atendo todo o Brasil remotamente. Como posso ajudar você hoje?', false);
+    } else {
+        const respostas = [
+            "Fala aí! Sou especialista em logos 3D neon cyan incríveis. Descreve sua ideia que eu gero na hora!",
+            "Sites modernos e responsivos como degusto.store são minha especialidade. Quer um orçamento?",
+            "Me chama no WhatsApp (34) 99811-0946 pra fechar projeto rapidinho!",
+            "Dica top: pra logos ficarem insanos, usa palavras como 'neon cyan', 'metálico', 'glowing', 'trap' no prompt!",
+            "Trabalho em Monte Carmelo/MG - Brasil 🇧🇷. Atendo todo o país remotamente!",
+            "Precisa de propaganda que vende? Posts, banners, motion graphics... Eu faço tudo!",
+            "Olá de Monte Carmelo/MG! Como posso ajudar no seu projeto hoje?",
+            "Quer ver exemplos reais? Dá uma olhada no portfólio aqui em cima!",
+            "Posso gerar um logo 3D neon agora mesmo. Só descrever o que você quer!"
+        ];
+        setTimeout(() => addMsg('IA: ' + respostas[Math.floor(Math.random() * respostas.length)], false), 800);
+    }
+}
+
+// Toggle Chat
+document.querySelector('.chat-toggle').onclick = () => {
+    document.querySelector('.chat-fixed').classList.toggle('active');
+};
+document.querySelector('.close-chat').onclick = () => {
+    document.querySelector('.chat-fixed').classList.remove('active');
+};

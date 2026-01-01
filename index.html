@@ -4,415 +4,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafaela Oliveira Store - Moda Feminina</title>
+    <meta name="description" content="Pablo Designer - Logos 3D Neon, Sites e Propaganda em Monte Carmelo MG. Atendimento Brasil todo.">
+    <meta name="keywords" content="designer Monte Carmelo MG, logos 3D neon, sites profissionais, propaganda Monte Carmelo, Pablo Designer MG, designer gráfico MG">
+    <meta name="geo.region" content="BR-MG">
+    <meta name="geo.placename" content="Monte Carmelo">
+    <meta name="geo.position" content="-18.7247;-47.4989">
+    <title>Pablo Designer | Logos 3D Neon, Sites e Propaganda - Monte Carmelo MG</title>
+
     <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Fonte estilosa para designers profissionais -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://js.puter.com/v2/"></script>
 </head>
 
 <body>
+    <!-- HEADER -->
     <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="https://i.ibb.co/MD2d4Rf7/LOGOMARCA-Rafaela-Oliveira-Store-2025.png" alt="Rafaela Oliveira Store" class="logo-img">
+        <div class="logo">
+            <img src="https://i.ibb.co/tpNPjsjN/nova-logo-pablo-sem-fundo.png" alt="Pablo Designer Monte Carmelo MG">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#gerador">Gerador IA</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="toggle">
+                <i class="fas fa-sun"></i>
             </div>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#categorias">Categorias</a></li>
-                    <li><a href="#novidades">Novidades</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <input type="search" placeholder="Buscar produtos..." class="search-input" aria-label="Buscar">
-                <button class="cart-btn" aria-label="Carrinho">🛒 <span class="cart-count">0</span></button>
-            </div>
-            <button class="menu-toggle" aria-label="Menu Mobile">☰</button>
+        </nav>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
         </div>
     </header>
 
-    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-        <div class="mobile-menu-header">
-            <h3>Menu</h3>
-            <button class="close-menu" id="close-menu" aria-label="Fechar Menu">&times;</button>
-        </div>
-        <ul class="mobile-nav-list">
-            <li><a href="#home">Início</a></li>
-            <li><a href="#categorias">Categorias</a></li>
-            <li><a href="#novidades">Novidades</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
-        <div class="mobile-menu-footer">
-            <a href="#" class="btn-primary" id="mobile-cart-link">Meu Carrinho</a>
-        </div>
-    </div>
-
-    <div id="cart-modal" class="modal" aria-hidden="true">
-        <div class="modal-overlay" id="modal-overlay"></div>
-        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Carrinho de Compras">
-            <div class="modal-header">
-                <h2>Seu Carrinho</h2>
-                <button class="close-modal" id="close-modal" aria-label="Fechar">&times;</button>
-            </div>
-            <div class="cart-items" id="cart-items"></div>
-            <div class="cart-total" id="cart-total"><strong>Total: R$ 0,00</strong></div>
-            <div class="cart-actions">
-                <button class="btn-secondary" id="clear-cart">Limpar Carrinho</button>
-                <button class="btn-primary" id="checkout">Finalizar via WhatsApp</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- HERO -->
     <section id="home" class="hero">
-        <div class="hero-slider">
-            <div class="slide active">
-                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="" class="slide-img">
-                <div class="slide-content">
-                    <h1>Moda Feminina Exclusiva</h1>
-                    <p>Eleve sua autoestima com estilo e bom gosto.</p>
-                    <a href="#categorias" class="btn-primary">Compre Agora</a>
-                </div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>PABLO DESIGNER</h1>
+            <p>Logos 3D neon, sites modernos e propagandas que vendem de verdade – Monte Carmelo / MG</p>
+            <a href="https://wa.me/5534998110946?text=Olá%20Pablo!%20Vi%20seu%20site%20e%20quero%20falar%20sobre%20meu%20projeto" class="neon-btn gradient-btn"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="section">
+        <h2 data-aos="fade-up">Quem sou eu</h2>
+        <p data-aos="fade-up" class="sobre-text">Designer brasileiro em <strong>Monte Carmelo / MG</strong>, apaixonado por criar marcas que impactam. Especialista em logos 3D neon, sites responsivos, anúncios visuais e motion graphics. Mais de 10 anos transformando ideias em resultados reais.
+            Atendo todo o Brasil remotamente!</p>
+    </section>
+
+    <!-- BANNER PARCEIROS -->
+    <div style="background: #2d3436; color: white; padding: 70px 20px; text-align: center; font-family: Arial, sans-serif; position: relative; border-radius: 15px; overflow: hidden; margin: 20px auto; max-width: 1200px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+        <div style="background: linear-gradient(45deg, rgba(108,92,231,0.8), rgba(162,155,254,0.8)); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+        <div style="position: relative; z-index: 2;">
+            <h1 style="font-size: 46px; margin: 0 0 20px 0;">Transforme Sua Marca com Pablo Designer</h1>
+            <p style="font-size: 24px; margin: 0 0 40px 0;">De Monte Carmelo/MG para o Brasil todo</p>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
+                <a href="https://www.pablologomarcas.online" target="_blank" style="background: #a29bfe; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">CONTRATAR SERVIÇOS</a>
+                <a href="https://www.degusto.store" target="_blank" style="background: #e17055; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">DÊ GUSTO</a>
+                <a href="https://www.batatarecheada.shop" target="_blank" style="background: #fdcb6e; color: #2d3436; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">BATATA RECHEADA</a>
             </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="" class="slide-img">
-                <div class="slide-content">
-                    <h1>Vestidos Leves</h1>
-                    <p>Perfeitos para o verão com toque de sofisticação.</p>
-                    <a href="#categorias" class="btn-primary">Explorar</a>
-                </div>
+        </div>
+    </div>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="section">
+        <h2 data-aos="fade-up">O que eu faço</h2>
+        <div class="cards">
+            <div class="card neon-card" data-aos="zoom-in">
+                <i class="fas fa-palette fa-3x" style="color: var(--accent);"></i>
+                <h3>Logos 3D Neon</h3>
+                <p>Identidade visual moderna e impactante</p>
+            </div>
+            <div class="card neon-card" data-aos="zoom-in">
+                <i class="fas fa-globe fa-3x" style="color: var(--accent);"></i>
+                <h3>Sites Profissionais</h3>
+                <p>Responsivos, rápidos e otimizados</p>
+            </div>
+            <div class="card neon-card" data-aos="zoom-in">
+                <i class="fas fa-ad fa-3x" style="color: var(--accent);"></i>
+                <h3>Propagandas Visuais</h3>
+                <p>Posts, banners e anúncios que convertem</p>
+            </div>
+            <div class="card neon-card" data-aos="zoom-in">
+                <i class="fas fa-video fa-3x" style="color: var(--accent);"></i>
+                <h3>Motion Graphics</h3>
+                <p>Vídeos e animações que chamam atenção</p>
             </div>
         </div>
     </section>
 
-    <section id="categorias" class="categories">
-        <div class="container">
-            <h2>Categorias</h2>
-            <div class="tabs">
-                <div class="tab-headers">
-                    <button class="tab-button active" data-target="#tshirt-content">T-shirt</button>
-                    <button class="tab-button" data-target="#conjunto-content">Conjunto</button>
-                    <button class="tab-button" data-target="#vestido-content">Vestido</button>
-                    <button class="tab-button" data-target="#jeans-content">Jeans</button>
-                    <button class="tab-button" data-target="#cropped-content">Cropped</button>
-                </div>
-                <div class="tab-contents">
-                    <div id="tshirt-content" class="tab-content active">
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="ts1">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>T-shirt Básica Branca</h3>
-                                <p>R$ 59,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="ts2">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>T-shirt Estampada</h3>
-                                <p>R$ 69,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="ts3">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>T-shirt Listrada</h3>
-                                <p>R$ 64,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="conjunto-content" class="tab-content">
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="cj1">
-                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Conjunto Sport</h3>
-                                <p>R$ 119,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="cj2">
-                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Conjunto Casual</h3>
-                                <p>R$ 139,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="cj3">
-                                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Conjunto Elegante</h3>
-                                <p>R$ 149,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="vestido-content" class="tab-content">
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="v1">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Vestido Floral</h3>
-                                <p>R$ 89,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="v2">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Vestido Midi</h3>
-                                <p>R$ 99,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="v3">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Vestido Longo</h3>
-                                <p>R$ 109,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="jeans-content" class="tab-content">
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="j1">
-                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Jeans Skinny</h3>
-                                <p>R$ 129,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="j2">
-                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Jeans Boyfriend</h3>
-                                <p>R$ 119,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="j3">
-                                <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Jeans Mom</h3>
-                                <p>R$ 139,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="cropped-content" class="tab-content">
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="cr1">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Cropped Básico</h3>
-                                <p>R$ 49,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="cr2">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Cropped Estampado</h3>
-                                <p>R$ 59,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="product-card" data-product-id="cr3">
-                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                                <h3>Cropped Rendado</h3>
-                                <p>R$ 69,90</p>
-                                <div class="product-options">
-                                    <label>Tamanho:</label>
-                                    <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                    <label>Quantidade:</label>
-                                    <input type="number" class="qty-input" value="1" min="1" max="10">
-                                </div>
-                                <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- GERADOR IA -->
+    <section id="gerador" class="section generator-lite">
+        <h2 data-aos="fade-up">Gerador de Imagens IA (Grátis)</h2>
+        <p data-aos="fade-up">Digite um prompt e gere imagens profissionais em segundos (parceria Puter.js)</p>
+        <div class="input-area">
+            <textarea id="promptIA" placeholder="Ex: Logo 3D neon cyan metálico glowing trap para loja de moda, fundo escuro, alta qualidade"></textarea>
+            <button id="generateIA" class="neon-btn gradient-btn"><i class="fas fa-magic"></i> Gerar Imagem</button>
+        </div>
+        <div class="result-ia">
+            <p id="loadingIA">Gerando sua imagem incrível...</p>
+            <img id="generatedIA" src="" alt="Imagem gerada pela IA">
         </div>
     </section>
 
-    <section id="novidades" class="products">
-        <div class="container">
-            <h2>Novidades</h2>
-            <div class="product-grid">
-                <div class="product-card" data-product-id="1">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                    <h3>Blusa Floral</h3>
-                    <p>R$ 89,90</p>
-                    <div class="product-options">
-                        <label>Tamanho:</label>
-                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                        <label>Quantidade:</label>
-                        <input type="number" class="qty-input" value="1" min="1" max="10">
-                    </div>
-                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-
-                <div class="product-card" data-product-id="2">
-                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7e49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                    <h3>Conjunto Short</h3>
-                    <p>R$ 129,90</p>
-                    <div class="product-options">
-                        <label>Tamanho:</label>
-                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                        <label>Quantidade:</label>
-                        <input type="number" class="qty-input" value="1" min="1" max="10">
-                    </div>
-                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-
-                <div class="product-card" data-product-id="3">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                    <h3>Vestido Verão</h3>
-                    <p>R$ 99,90</p>
-                    <div class="product-options">
-                        <label>Tamanho:</label>
-                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                        <label>Quantidade:</label>
-                        <input type="number" class="qty-input" value="1" min="1" max="10">
-                    </div>
-                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-
-                <div class="product-card" data-product-id="4">
-                    <img src="https://images.unsplash.com/photo-1487222476594-890f112d5f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="">
-                    <h3>Saia Midi</h3>
-                    <p>R$ 79,90</p>
-                    <div class="product-options">
-                        <label>Tamanho:</label>
-                        <select class="size-select"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                        <label>Quantidade:</label>
-                        <input type="number" class="qty-input" value="1" min="1" max="10">
-                    </div>
-                    <button class="btn-secondary add-to-cart">Adicionar ao Carrinho</button>
-                </div>
-
-            </div>
+    <!-- PORTFÓLIO -->
+    <section id="portfolio" class="section">
+        <h2 data-aos="fade-up">Portfólio</h2>
+        <div class="filters">
+            <button data-filter="all" class="neon-btn gradient-btn active"><i class="fas fa-th"></i> Todos</button>
+            <button data-filter="logos" class="neon-btn gradient-btn"><i class="fas fa-palette"></i> Logos 3D</button>
+            <button data-filter="sites" class="neon-btn gradient-btn"><i class="fas fa-globe"></i> Sites</button>
         </div>
+        <div class="gallery" id="gallery"></div>
     </section>
 
-    <section id="sobre" class="about">
-        <div class="container">
-            <h2>Sobre Nós</h2>
-            <p>A Rafaela Oliveira Store é especializada em moda feminina. Reforma em 2025 para melhor experiência de compra!</p>
-        </div>
+    <!-- CONTATO -->
+    <section id="contato" class="section">
+        <h2 data-aos="fade-up">Vamos conversar?</h2>
+        <p data-aos="fade-up" class="contato-text">Me conta sobre seu projeto! Respondo rapidinho de Monte Carmelo/MG.</p>
+        <a href="https://wa.me/5534998110946?text=Oi%20Pablo!%20Quero%20um%20logo%20ou%20site" class="neon-btn gradient-btn big-btn"><i class="fab fa-whatsapp"></i> Mandar mensagem no WhatsApp</a>
     </section>
 
-    <section class="newsletter">
-        <div class="container">
-            <h2>Receba Dicas e Ofertas</h2>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Seu e-mail" required>
-                <button type="submit" class="btn-primary">Inscrever-se</button>
-            </form>
+    <!-- FOOTER -->
+    <footer>
+        <div class="radio-player">
+            <p class="ai-msg">Rádio (DJ PABLOBASS 24Horas)</p>
+            <center><audio id="radio" controls preload="none">
+                <source src="https://stream.zeno.fm/si5xey7akartv.mp3" type="audio/mpeg">
+            </audio></center>
         </div>
-    </section>
 
-    <footer id="contato" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Rafaela Oliveira Store</h3>
-                    <p>Moda feminina com estilo e confiança.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul>
-                        <li><a href="#categorias">T-shirt</a></li>
-                        <li><a href="#categorias">Conjunto</a></li>
-                        <li><a href="#categorias">Vestido</a></li>
-                        <li><a href="#categorias">Jeans</a></li>
-                        <li><a href="#categorias">Cropped</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <p>Email: contato@rafaelaoliveirastore.com.br</p>
-                    <p>Tel: (11) 99999-9999</p>
-                    <p>WhatsApp: <a href="https://wa.me/5534999194464" style="color: #25D366;">+55 34 99919-4464</a></p>
-                </div>
-                <div class="footer-section">
-                    <h4>Siga-nos</h4>
-                    <div class="social-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="https://wa.me/5534999194464">WhatsApp</a></div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Rafaela Oliveira Store. Todos os direitos reservados.</p>
+        <div class="trust-badges" style="margin: 50px 0; text-align: center;">
+            <p style="font-size: 1.2em; margin-bottom: 20px;">Site Seguro e Confiável</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 0 auto;">
+                <img src="https://trustlock.co/badges/free-ssl-secured-badge.png" alt="SSL Secured" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-secure-checkout-badge.png" alt="Secure Checkout" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-payment-badge.png" alt="Secure Payment" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-money-back-guarantee-badge.png" alt="Money Back Guarantee" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-norton-secured-badge.png" alt="Norton Secured" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-mcafee-secure-badge.png" alt="McAfee Secure" style="height: 80px;">
+                <img src="https://www.ssl2buy.com/images/site-seal/ssl-secured-seal.png" alt="SSL2Buy Secured" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-visa-mastercard-badge.png" alt="Visa Mastercard" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-paypal-verified-badge.png" alt="PayPal Verified" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-satisfaction-guarantee-badge.png" alt="Satisfaction Guarantee" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-trusted-site-badge.png" alt="Trusted Site" style="height: 80px;">
+                <img src="https://trustlock.co/badges/free-encrypted-badge.png" alt="Encrypted" style="height: 80px;">
             </div>
         </div>
+
+        <div class="widgets">
+            <a href="https://www.youtube.com/@djpablobassoriginal" target="_blank" class="neon-btn gradient-btn"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="https://www.instagram.com/pablologomarcas/" target="_blank" class="neon-btn gradient-btn"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+        <p>© 2026 Pablo Designer - Monte Carmelo - Minas Gerais - Brasil 🇧🇷 | WhatsApp: (34) 99811-0946</p>
     </footer>
 
+    <!-- BOTÕES FIXOS -->
+    <a href="https://wa.me/5534998110946" class="fixed-btn whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="chat-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <div class="chat-fixed">
+        <div class="chat-header">Assistente IA <span class="close-chat"><i class="fas fa-times"></i></span></div>
+        <div class="chat-body" id="chatBody">
+            <p class="ai-msg">IA: Fala aí! Pode perguntar sobre logos, sites ou pedir pra gerar imagem. Estou em Monte Carmelo/MG! 🚀</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatMsg" placeholder="Digite sua mensagem...">
+            <button id="sendMsg" class="neon-btn gradient-btn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox"><i class="fas fa-times"></i></span>
+        <img id="lightbox-img" src="" alt="Imagem ampliada">
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 
