@@ -4,196 +4,1017 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pablo Designer - Logos 3D Neon, Sites e Propaganda em Monte Carmelo MG. Atendimento Brasil todo.">
-    <meta name="keywords" content="designer Monte Carmelo MG, logos 3D neon, sites profissionais, propaganda Monte Carmelo, Pablo Designer MG, designer gráfico MG">
-    <meta name="geo.region" content="BR-MG">
-    <meta name="geo.placename" content="Monte Carmelo">
-    <meta name="geo.position" content="-18.7247;-47.4989">
-    <title>Pablo Designer | Logos 3D Neon, Sites e Propaganda - Monte Carmelo MG</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Fonte estilosa para designers profissionais -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://js.puter.com/v2/"></script>
+    <title>Portal Criativo Ultimate - Milhares de Ideias, Ferramentas & Jogos</title>
+    <style>
+         :root {
+            --primary: #00e5ff;
+            --primary2: #6a00ff;
+            --bg-gradient: radial-gradient(circle at top, #121a33, #05070d);
+            --header-bg: rgba(0, 0, 0, 0.7);
+            --card-bg: rgba(18, 26, 51, 0.6);
+            --text-color: #eaeaff;
+            --glow: 0 0 20px rgba(0, 229, 255, 0.4);
+            --input-bg: rgba(14, 21, 48, 0.7);
+            --pre-bg: rgba(10, 16, 34, 0.8);
+            --border-color: rgba(0, 229, 255, 0.2);
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.8);
+            --shadow-menu: 0 8px 20px rgba(0, 0, 0, 0.5);
+            --hover-bg: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(106, 0, 255, 0.2));
+            --li-bg: rgba(14, 21, 48, 0.4);
+            --cell-bg: rgba(14, 21, 48, 0.7);
+            --cell-hover: rgba(0, 229, 255, 0.2);
+        }
+        
+        .light-mode {
+            --primary: #00d4ff;
+            --primary2: #5e00e0;
+            --bg-gradient: radial-gradient(circle at top, #c5eaff, #ffffff);
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-color: #1a1a1a;
+            --glow: 0 0 20px rgba(0, 212, 255, 0.3);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --pre-bg: #f5f7fa;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 15px 40px rgba(0, 0, 0, 0.1);
+            --shadow-menu: 0 8px 25px rgba(0, 0, 0, 0.08);
+            --hover-bg: linear-gradient(135deg, rgba(0, 212, 255, 0.18), rgba(94, 0, 224, 0.18));
+            --li-bg: rgba(0, 0, 0, 0.03);
+            --cell-bg: rgba(230, 240, 255, 0.9);
+            --cell-hover: rgba(0, 180, 255, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: background 0.6s ease, color 0.6s ease;
+        }
+        
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        header button {
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--glow);
+            transition: all 0.4s ease;
+            margin-left: 10px;
+            display: none;
+        }
+        
+        header button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+        }
+        
+        main {
+            padding: 30px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: none;
+            background: var(--input-bg);
+            color: var(--text-color);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        
+        input:focus,
+        textarea:focus {
+            outline: none;
+            box-shadow: var(--glow);
+        }
+        
+        input::placeholder {
+            color: rgba(150, 150, 150, 0.8);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            font-weight: 800;
+            cursor: pointer;
+            margin: 12px 0;
+            box-shadow: var(--glow);
+            transition: all 0.4s ease;
+            font-size: 1.1em;
+        }
+        
+        button:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.6);
+        }
+        
+        .card {
+            max-width: 420px;
+            margin: 60px auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .portal {
+            max-width: 1600px;
+            margin: auto;
+        }
+        
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+        
+        .menu div {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            padding: 35px;
+            border-radius: 22px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-menu);
+            border: 1px solid var(--border-color);
+            font-size: 1.15em;
+            font-weight: 600;
+        }
+        
+        .menu div:hover {
+            transform: translateY(-14px) scale(1.06);
+            box-shadow: 0 25px 60px rgba(0, 212, 255, 0.35);
+            background: var(--hover-bg);
+        }
+        
+        .area {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 45px;
+            border-radius: 30px;
+            min-height: 600px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-color);
+        }
+        
+        .area pre {
+            background: var(--pre-bg);
+            padding: 25px;
+            border-radius: 14px;
+            white-space: pre-wrap;
+            margin-top: 25px;
+            border-left: 5px solid var(--primary);
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .area ul {
+            padding-left: 35px;
+            margin-top: 25px;
+        }
+        
+        .area li {
+            margin: 12px 0;
+            padding: 12px;
+            background: var(--li-bg);
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+        
+        .msg {
+            margin-top: 15px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: var(--cell-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .cell:hover {
+            background: var(--cell-hover);
+        }
+        
+        .color-swatch {
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 12px black;
+            margin: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            font-size: 1em;
+        }
+        
+        .hangman-display {
+            font-size: 2.5em;
+            letter-spacing: 8px;
+            text-align: center;
+            margin: 30px 0;
+            font-family: monospace;
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">
-            <img src="https://i.ibb.co/tpNPjsjN/nova-logo-pablo-sem-fundo.png" alt="Pablo Designer Monte Carmelo MG">
-        </div>
-        <nav class="nav">
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#gerador">Gerador IA</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-            <div class="toggle">
-                <i class="fas fa-sun"></i>
-            </div>
-        </nav>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
+    <header>
+        <b>🚀 Portal Criativo Ultimate - Milhares de Ideias & Jogos Infinitos</b>
+        <div>
+            <button id="logoutBtn">Sair</button>
+            <button id="themeToggle" title="Alternar tema">🌙</button>
         </div>
     </header>
 
-    <!-- HERO -->
-    <section id="home" class="hero">
-        <div class="hero-content" data-aos="fade-up">
-            <h1>PABLO DESIGNER</h1>
-            <p>Logos 3D neon, sites modernos e propagandas que vendem de verdade – Monte Carmelo / MG</p>
-            <a href="https://wa.me/5534998110946?text=Olá%20Pablo!%20Vi%20seu%20site%20e%20quero%20falar%20sobre%20meu%20projeto" class="neon-btn gradient-btn"><i class="fab fa-whatsapp"></i> Falar no WhatsApp</a>
+    <main>
+        <!-- LOGIN -->
+        <div id="loginBox" class="card">
+            <h2>Entrar</h2>
+            <input id="loginUser" placeholder="Usuário">
+            <input id="loginPass" type="password" placeholder="Senha">
+            <button id="loginBtn">Entrar</button>
+            <p><a href="#" id="goRegister">Criar conta</a></p>
+            <div id="loginMsg" class="msg"></div>
         </div>
-    </section>
 
-    <!-- SOBRE -->
-    <section id="sobre" class="section">
-        <h2 data-aos="fade-up">Quem sou eu</h2>
-        <p data-aos="fade-up" class="sobre-text">Designer brasileiro em <strong>Monte Carmelo / MG</strong>, apaixonado por criar marcas que impactam. Especialista em logos 3D neon, sites responsivos, anúncios visuais e motion graphics. Mais de 10 anos transformando ideias em resultados reais.
-            Atendo todo o Brasil remotamente!</p>
-    </section>
+        <!-- REGISTRO -->
+        <div id="registerBox" class="card hidden">
+            <h2>Criar Conta</h2>
+            <input id="regUser" placeholder="Usuário">
+            <input id="regPass" type="password" placeholder="Senha">
+            <button id="registerBtn">Cadastrar</button>
+            <p><a href="#" id="goLogin">Voltar</a></p>
+            <div id="regMsg" class="msg"></div>
+        </div>
 
-    <!-- BANNER PARCEIROS -->
-    <div style="background: #2d3436; color: white; padding: 70px 20px; text-align: center; font-family: Arial, sans-serif; position: relative; border-radius: 15px; overflow: hidden; margin: 20px auto; max-width: 1200px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-        <div style="background: linear-gradient(45deg, rgba(108,92,231,0.8), rgba(162,155,254,0.8)); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
-        <div style="position: relative; z-index: 2;">
-            <h1 style="font-size: 46px; margin: 0 0 20px 0;">Transforme Sua Marca com Pablo Designer</h1>
-            <p style="font-size: 24px; margin: 0 0 40px 0;">De Monte Carmelo/MG para o Brasil todo</p>
-            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
-                <a href="https://www.pablologomarcas.online" target="_blank" style="background: #a29bfe; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">CONTRATAR SERVIÇOS</a>
-                <a href="https://www.degusto.store" target="_blank" style="background: #e17055; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">DÊ GUSTO</a>
-                <a href="https://www.batatarecheada.shop" target="_blank" style="background: #fdcb6e; color: #2d3436; padding: 18px 40px; font-size: 20px; text-decoration: none; border-radius: 50px; font-weight: bold;">BATATA RECHEADA</a>
+        <!-- PORTAL -->
+        <div id="portal" class="portal hidden">
+            <h2 style="text-align:center; margin-bottom:40px; font-size:2em;">Bem-vindo ao Portal Ultimate, <span id="userName"></span> 👋</h2>
+
+            <div class="menu">
+                <div onclick="showSection('Ideias de conteúdo')">💡 Ideias de Conteúdo (2000+)</div>
+                <div onclick="showSection('Roteiro de vídeo')">🎬 Roteiro Completo de Vídeo</div>
+                <div onclick="showSection('Estrutura de música')">🎵 Estrutura Detalhada de Música</div>
+                <div onclick="showSection('Prompt para IA')">🤖 Prompts Avançados para IA</div>
+                <div onclick="showSection('Títulos YouTube')">📹 Títulos Virais YouTube</div>
+                <div onclick="showSection('Descrições YouTube')">📝 Descrições Completas YouTube</div>
+                <div onclick="showSection('Hashtags')">🏷️ Pacotes de Hashtags</div>
+                <div onclick="showSection('Ideias Thumbnail')">🖼️ Ideias Detalhadas Thumbnail</div>
+                <div onclick="showSection('Letras de música')">🎤 Letras Completas de Música</div>
+                <div onclick="showSection('Baixar MP3 YouTube')">🔊 Baixar MP3 YouTube</div>
+                <div onclick="showSection('Gerador de nomes')">🌟 Gerador de Nomes (50+)</div>
+                <div onclick="showSection('Gerador de bio')">✍️ Gerador de Bio Completa</div>
+                <div onclick="showSection('Paleta de Cores')">🎨 Paleta de 12 Cores</div>
+                <div onclick="showSection('Gerador de Quotes')">💬 30 Quotes Inspiradoras</div>
+                <div onclick="showSection('Ideias para Reels')">🎥 Ideias para Reels/TikTok</div>
+                <div onclick="showSection('Ideias para Instagram')">📸 Ideias para Posts Instagram</div>
+                <div onclick="showSection('Captions Instagram')">💬 Captions para Instagram</div>
+                <div onclick="showSection('Ideias TikTok')">🎞️ Ideias Específicas TikTok</div>
+                <div onclick="showSection('Gerador de Histórias')">📖 Gerador de Histórias Curtas</div>
+                <div onclick="showSection('Gerador de Memes')">😂 Textos para Memes Virais</div>
+
+                <!-- JOGOS -->
+                <div onclick="showSection('Pedra Papel Tesoura')">✊✋✂️ Pedra Papel Tesoura</div>
+                <div onclick="showSection('Jogo da Velha')">❌⭕ Jogo da Velha</div>
+                <div onclick="showSection('Adivinhe o Número')">🔢 Adivinhe o Número</div>
+                <div onclick="showSection('Jogo da Forca')">🔤 Jogo da Forca</div>
+            </div>
+
+            <div id="area" class="area">
+                <p style="text-align:center; padding-top:150px; font-size:1.4em;">Escolha uma das muitas opções acima para começar a criar! 🚀</p>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="section">
-        <h2 data-aos="fade-up">O que eu faço</h2>
-        <div class="cards">
-            <div class="card neon-card" data-aos="zoom-in">
-                <i class="fas fa-palette fa-3x" style="color: var(--accent);"></i>
-                <h3>Logos 3D Neon</h3>
-                <p>Identidade visual moderna e impactante</p>
-            </div>
-            <div class="card neon-card" data-aos="zoom-in">
-                <i class="fas fa-globe fa-3x" style="color: var(--accent);"></i>
-                <h3>Sites Profissionais</h3>
-                <p>Responsivos, rápidos e otimizados</p>
-            </div>
-            <div class="card neon-card" data-aos="zoom-in">
-                <i class="fas fa-ad fa-3x" style="color: var(--accent);"></i>
-                <h3>Propagandas Visuais</h3>
-                <p>Posts, banners e anúncios que convertem</p>
-            </div>
-            <div class="card neon-card" data-aos="zoom-in">
-                <i class="fas fa-video fa-3x" style="color: var(--accent);"></i>
-                <h3>Motion Graphics</h3>
-                <p>Vídeos e animações que chamam atenção</p>
-            </div>
-        </div>
-    </section>
+    <script>
+        // Variáveis globais para jogos
+        let secretNumber = 0;
+        let guessAttempts = 0;
+        let tttBoard = Array(9).fill('');
+        let hangmanWord = '';
+        let hangmanGuessed = [];
+        let hangmanWrong = 0;
+        const hangmanWords = ['javascript', 'programacao', 'criativo', 'youtube', 'instagram', 'tiktok', 'musica', 'viagem', 'tecnologia', 'amor', 'felicidade', 'sucesso', 'motivacao', 'inspiracao', 'conteudo', 'viral', 'trending', 'brasil', 'digital', 'criador'];
 
-    <!-- GERADOR IA -->
-    <section id="gerador" class="section generator-lite">
-        <h2 data-aos="fade-up">Gerador de Imagens IA (Grátis)</h2>
-        <p data-aos="fade-up">Digite um prompt e gere imagens profissionais em segundos (parceria Puter.js)</p>
-        <div class="input-area">
-            <textarea id="promptIA" placeholder="Ex: Logo 3D neon cyan metálico glowing trap para loja de moda, fundo escuro, alta qualidade"></textarea>
-            <button id="generateIA" class="neon-btn gradient-btn"><i class="fas fa-magic"></i> Gerar Imagem</button>
-        </div>
-        <div class="result-ia">
-            <p id="loadingIA">Gerando sua imagem incrível...</p>
-            <img id="generatedIA" src="" alt="Imagem gerada pela IA">
-        </div>
-    </section>
+        // Funções auxiliares
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
 
-    <!-- PORTFÓLIO -->
-    <section id="portfolio" class="section">
-        <h2 data-aos="fade-up">Portfólio</h2>
-        <div class="filters">
-            <button data-filter="all" class="neon-btn gradient-btn active"><i class="fas fa-th"></i> Todos</button>
-            <button data-filter="logos" class="neon-btn gradient-btn"><i class="fas fa-palette"></i> Logos 3D</button>
-            <button data-filter="sites" class="neon-btn gradient-btn"><i class="fas fa-globe"></i> Sites</button>
-        </div>
-        <div class="gallery" id="gallery"></div>
-    </section>
+        function randomColor() {
+            return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+        }
 
-    <!-- CONTATO -->
-    <section id="contato" class="section">
-        <h2 data-aos="fade-up">Vamos conversar?</h2>
-        <p data-aos="fade-up" class="contato-text">Me conta sobre seu projeto! Respondo rapidinho de Monte Carmelo/MG.</p>
-        <a href="https://wa.me/5534998110946?text=Oi%20Pablo!%20Quero%20um%20logo%20ou%20site" class="neon-btn gradient-btn big-btn"><i class="fab fa-whatsapp"></i> Mandar mensagem no WhatsApp</a>
-    </section>
+        function extractYouTubeID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*)/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="radio-player">
-            <p class="ai-msg">Rádio (DJ PABLOBASS 24Horas)</p>
-            <center><audio id="radio" controls preload="none">
-                <source src="https://stream.zeno.fm/si5xey7akartv.mp3" type="audio/mpeg">
-            </audio></center>
-        </div>
+        let currentSection = '';
 
-        <div class="trust-badges" style="margin: 50px 0; text-align: center;">
-            <p style="font-size: 1.2em; margin-bottom: 20px;">Site Seguro e Confiável</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 0 auto;">
-                <img src="https://trustlock.co/badges/free-ssl-secured-badge.png" alt="SSL Secured" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-secure-checkout-badge.png" alt="Secure Checkout" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-payment-badge.png" alt="Secure Payment" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-money-back-guarantee-badge.png" alt="Money Back Guarantee" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-norton-secured-badge.png" alt="Norton Secured" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-mcafee-secure-badge.png" alt="McAfee Secure" style="height: 80px;">
-                <img src="https://www.ssl2buy.com/images/site-seal/ssl-secured-seal.png" alt="SSL2Buy Secured" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-visa-mastercard-badge.png" alt="Visa Mastercard" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-paypal-verified-badge.png" alt="PayPal Verified" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-satisfaction-guarantee-badge.png" alt="Satisfaction Guarantee" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-trusted-site-badge.png" alt="Trusted Site" style="height: 80px;">
-                <img src="https://trustlock.co/badges/free-encrypted-badge.png" alt="Encrypted" style="height: 80px;">
-            </div>
-        </div>
+        function showSection(section) {
+            currentSection = section;
+            const area = document.getElementById("area");
+            let html = `<h3>${section}</h3>`;
 
-        <div class="widgets">
-            <a href="https://www.youtube.com/@djpablobassoriginal" target="_blank" class="neon-btn gradient-btn"><i class="fab fa-youtube"></i> YouTube</a>
-            <a href="https://www.instagram.com/pablologomarcas/" target="_blank" class="neon-btn gradient-btn"><i class="fab fa-instagram"></i> Instagram</a>
-        </div>
-        <p>© 2026 Pablo Designer - Monte Carmelo - Minas Gerais - Brasil 🇧🇷 | WhatsApp: (34) 99811-0946</p>
-    </footer>
+            if (section === 'Baixar MP3 YouTube') {
+                html += `
+                    <p>Insira a URL do vídeo do YouTube para abrir o downloader externo (y2mate).</p>
+                    <p style="color:#ff6b6b;"><strong>Aviso importante: Use apenas para conteúdos sem direitos autorais ou com permissão explícita!</strong></p>
+                    <input id="inputSpecial" placeholder="https://www.youtube.com/watch?v=..." style="margin:15px 0;">
+                    <button onclick="specialAction()">Abrir Downloader MP3</button>`;
+            } else if (section === 'Pedra Papel Tesoura') {
+                html += `
+                    <p>Desafie o computador neste clássico!</p>
+                    <div style="text-align:center; margin:40px 0;">
+                        <button onclick="playRPS('pedra')" style="width:auto; margin:15px; font-size:1.8em; padding:20px 40px;">✊ Pedra</button>
+                        <button onclick="playRPS('papel')" style="width:auto; margin:15px; font-size:1.8em; padding:20px 40px;">✋ Papel</button>
+                        <button onclick="playRPS('tesoura')" style="width:auto; margin:15px; font-size:1.8em; padding:20px 40px;">✂️ Tesoura</button>
+                    </div>
+                    <div id="rpsResult" style="font-size:1.5em; margin-top:40px;"></div>`;
+            } else if (section === 'Jogo da Velha') {
+                tttBoard = Array(9).fill('');
+                html += `
+                    <p>Jogue contra o computador (você é ❌, computador ⭕)</p>
+                    <div style="display:grid; grid-template-columns:repeat(3,110px); gap:12px; width:350px; margin:50px auto;">
+                        <div class="cell" id="cell0" onclick="playerMove(0)"></div>
+                        <div class="cell" id="cell1" onclick="playerMove(1)"></div>
+                        <div class="cell" id="cell2" onclick="playerMove(2)"></div>
+                        <div class="cell" id="cell3" onclick="playerMove(3)"></div>
+                        <div class="cell" id="cell4" onclick="playerMove(4)"></div>
+                        <div class="cell" id="cell5" onclick="playerMove(5)"></div>
+                        <div class="cell" id="cell6" onclick="playerMove(6)"></div>
+                        <div class="cell" id="cell7" onclick="playerMove(7)"></div>
+                        <div class="cell" id="cell8" onclick="playerMove(8)"></div>
+                    </div>
+                    <div id="tttResult" style="text-align:center; margin:40px 0; font-size:1.6em;"></div>
+                    <button onclick="resetTTT()">Novo Jogo</button>`;
+            } else if (section === 'Adivinhe o Número') {
+                secretNumber = Math.floor(Math.random() * 100) + 1;
+                guessAttempts = 0;
+                html += `
+                    <p>Escolhi um número entre 1 e 100. Quantas tentativas você precisa?</p>
+                    <input id="guessInput" type="number" min="1" max="100" placeholder="Seu palpite">
+                    <button onclick="guessNumber()">Adivinhar</button>
+                    <div id="guessResult" style="margin-top:40px; line-height:1.8;"></div>
+                    <button onclick="newGuessGame()" style="margin-top:30px;">Novo Jogo</button>`;
+            } else if (section === 'Jogo da Forca') {
+                hangmanWord = randomChoice(hangmanWords).toUpperCase();
+                hangmanGuessed = [];
+                hangmanWrong = 0;
+                html += `
+                    <p>Adivinhe a palavra! Tema: Palavras comuns da criação de conteúdo</p>
+                    <div class="hangman-display" id="hangmanWord">${getHangmanDisplay()}</div>
+                    <p>Letras erradas: <span id="wrongLetters"></span></p>
+                    <p>Tentativas restantes: <span id="attemptsLeft">6</span></p>
+                    <input id="letterInput" maxlength="1" placeholder="Digite uma letra" style="width:200px; text-transform:uppercase;">
+                    <button onclick="guessLetter()">Adivinhar Letra</button>
+                    <button onclick="showSection('Jogo da Forca')" style="margin-top:20px;">Novo Jogo</button>
+                    <div id="hangmanResult" style="margin-top:30px; font-size:1.4em;"></div>`;
+            } else {
+                html += `
+                    <label for="inputTema">Tema / palavra-chave (obrigatório para melhores resultados):</label>
+                    <input id="inputTema" placeholder="Ex: viagens, tecnologia, amor, motivação, fitness...">
+                    <button onclick="generateContent()">Gerar Conteúdo Completo</button>
+                    <div id="output" style="margin-top:40px;"></div>`;
+            }
 
-    <!-- BOTÕES FIXOS -->
-    <a href="https://wa.me/5534998110946" class="fixed-btn whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+            area.innerHTML = html;
 
-    <div class="chat-toggle">
-        <i class="fas fa-comment-dots"></i>
-    </div>
+            if (document.getElementById("inputTema")) {
+                generateContent();
+            }
+            if (section === 'Jogo da Velha') {
+                document.getElementById('tttResult').textContent = '';
+            }
+            if (section === 'Jogo da Forca') {
+                updateHangmanDisplay();
+            }
+        }
 
-    <div class="chat-fixed">
-        <div class="chat-header">Assistente IA <span class="close-chat"><i class="fas fa-times"></i></span></div>
-        <div class="chat-body" id="chatBody">
-            <p class="ai-msg">IA: Fala aí! Pode perguntar sobre logos, sites ou pedir pra gerar imagem. Estou em Monte Carmelo/MG! 🚀</p>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="chatMsg" placeholder="Digite sua mensagem...">
-            <button id="sendMsg" class="neon-btn gradient-btn"><i class="fas fa-arrow-right"></i></button>
-        </div>
-    </div>
+        function generateContent() {
+            const input = document.getElementById("inputTema");
+            let tema = input ? input.value.trim() : '';
+            if (!tema) tema = 'criatividade e sucesso';
 
-    <!-- LIGHTBOX -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-lightbox"><i class="fas fa-times"></i></span>
-        <img id="lightbox-img" src="" alt="Imagem ampliada">
-    </div>
+            let output = '';
+            const outputElem = document.getElementById("output");
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+            switch (currentSection) {
+                case 'Ideias de conteúdo':
+                    const tipos = [
+                        "Top 20", "Tutorial definitivo", "Review completo", "Minha jornada com", "Como dominar",
+                        "Dicas avançadas para", "Os melhores ferramentas de", "Desafio de 90 dias", "Segredos que ninguém revela sobre",
+                        "Vlog diário sobre", "Erros fatais em", "Comparação épica", "Rotina produtiva com", "Mitos vs realidade sobre",
+                        "Como criar em casa", "Tendências 2026 de", "Como mudou minha vida", "Unboxing premium de", "Projetos DIY incríveis para",
+                        "Receitas saudáveis com", "Viagens dos sonhos inspiradas em", "Transformação completa com", "Antes e depois chocante de",
+                        "Como economizar muito em", "Previsões bombásticas para", "Reação sincera a", "Paródia hilária de", "Colab ideias sobre",
+                        "Q&A completo sobre", "Behind the scenes real de", "Um dia intenso com", "Benefícios científicos de", "Como evitar armadilhas em",
+                        "Ranking definitivo de", "História completa de", "Fatos impressionantes sobre", "Challenge extremo com", "Tour virtual por",
+                        "Testando gadgets de", "Life hacks geniais para", "Série exclusiva sobre", "Novidades quentes em", "Minha opinião polêmica sobre",
+                        "Análise profunda de", "Estratégias profissionais para", "Como crescer rápido no nicho de", "Casos reais de sucesso em",
+                        "Ferramentas essenciais para", "Ideias baratas e eficazes para", "Motivação diária para", "Os piores produtos de",
+                        "Melhor vs pior de", "Guia absoluto para", "Segredos dos tops sobre", "Como eu alcancei resultados com", "Teste de 7 dias de",
+                        "Recomendações premium de", "Lista gigante de", "Passo a passo detalhado para", "Entrevista fictícia com especialista em",
+                        "Resenha honesta de", "Comparação lado a lado", "Tutorial master de", "Desafio insano de", "24 horas vivendo",
+                        "Transformação radical com", "Os mais virais sobre", "Memes engraçados de", "Dicas secretas de experts em",
+                        "Rotina matinal com", "Como ganhar dinheiro com", "Os maiores mitos sobre", "Como começar do zero em", "Evolução de"
+                    ];
+                    output = '<strong>2000 ideias ultra detalhadas geradas para o tema "' + tema + '":</strong><ul>';
+                    for (let i = 0; i < 2000; i++) {
+                        output += `<li>${i+1}. ${randomChoice(tipos)} ${tema} – com dicas práticas, exemplos reais e estratégias comprovadas</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Roteiro de vídeo':
+                    output = `<pre>Roteiro completo e profissional para vídeo longo sobre "${tema}":
+
+HOOK INICIAL (0:00-0:20):
+- Comece com uma pergunta impactante ou história pessoal: "Você já se perguntou como ${tema} pode transformar completamente sua vida?"
+
+INTRODUÇÃO (0:20-2:00):
+- Saudação animada
+- Apresentação do tema com contexto atual
+- Promessa de valor: "Hoje vou te mostrar 10 estratégias comprovadas, exemplos reais e um passo a passo que mudou minha vida"
+
+CORPO PRINCIPAL (2:00-15:00):
+1. Conceito fundamental e explicação detalhada
+2. História pessoal ou case study real
+3. 5-7 dicas práticas com exemplos visuais
+4. Erros comuns que 90% das pessoas cometem
+5. Ferramentas e recursos recomendados (com links)
+6. Demonstração ao vivo ou tela compartilhada
+7. Dicas avançadas para quem já tem experiência
+
+CONCLUSÃO (15:00-fim):
+- Resumo completo dos pontos principais
+- Reflexão motivacional
+- Call to Action forte: like, comentário com sua experiência, inscrição + sininho
+- Teaser do próximo vídeo relacionado
+- Agradecimento genuíno</pre>`;
+                    break;
+
+                case 'Estrutura de música':
+                    output = `<pre>Estrutura completa de música comercial sobre "${tema}":
+
+Intro (0:00-0:20) - Instrumental atmosférico criando emoção
+Verso 1 (0:20-0:50) - Contando a história inicial, introduzindo o conflito
+Pré-Refrão (0:50-1:10) - Construindo tensão emocional
+Refrão (1:10-1:40) - Explosão cativante, repetitivo e memorável
+Verso 2 (1:40-2:10) - Desenvolvimento da narrativa, mais intenso
+Pré-Refrão (2:10-2:30) - Variação com mais camadas
+Refrão (2:30-3:00) - Com vocais adicionais
+Ponte (3:00-3:30) - Mudança total de tom, momento emocional ou instrumental
+Refrão Final (3:30-4:10) - Mais poderoso, com ad-libs e camadas completas
+Outro (4:10-fim) - Fade out gradual com eco</pre>`;
+                    break;
+
+                case 'Prompt para IA':
+                    const estilos = ["fotorealista ultra detalhado", "cyberpunk neon", "arte conceitual épica", "pintura a óleo clássica", "render 3D octane", "anime estúdio ghibli", "fotografia profissional canon", "surrealista dalí", "vaporwave retro", "dark fantasy", "minimalista", "cinematográfico widescreen"];
+                    output = `Prompt avançado e otimizado para geração de imagem:\n\n"Uma obra-prima altamente detalhada e cinematográfica sobre ${tema}, no estilo ${randomChoice(estilos)}, iluminação dramática com luz volumétrica, cores vibrantes e saturadas, composição perfeita seguindo regra dos terços, texturas ricas, ultra realista, 8k, masterpiece, best quality --ar 16:9 --v 6 --q 2 --stylize 750"`;
+                    break;
+
+                case 'Títulos YouTube':
+                    const titleTemplates = [
+                        `Os 15 Segredos ABSURDOS Sobre ${tema.toUpperCase()} Que As Pessoas Escondem De Você! 😱`,
+                        `Eu Testei ${tema} Por 90 Dias Seguidos... O Resultado Me Deixou Sem Palavras!`,
+                        `Guia Completo 2026 de ${tema} – Do Zero Ao Profissional (Passo a Passo)`,
+                        `Por Que Todo Mundo Está Ficando Rico Com ${tema} em 2026? A Verdade!`,
+                        `Os 10 Maiores Erros Que Estão Destruindo Sua Vida Com ${tema}`,
+                        `Como Eu Transformei Minha Vida Com ${tema} Em Apenas 30 Dias (História Real)`,
+                        `O Que Acontece Quando Você Faz ${tema} Todo Dia? Resultados Chocantes!`
+                    ];
+                    output = '<strong>30 títulos altamente otimizados para cliques explosivos:</strong><ul>';
+                    for (let i = 0; i < 30; i++) {
+                        output += `<li>${randomChoice(titleTemplates)}</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Descrições YouTube':
+                    output = `Vídeo completo sobre ${tema}! Aqui eu revelo tudo que você precisa saber para dominar esse tema em 2026 🔥
+
+🕒 Timestamps detalhados:
+00:00 - Introdução bombástica
+01:30 - Conceito fundamental
+04:20 - Dica prática #1 com exemplo
+07:45 - Erros comuns e como evitar
+12:10 - Minha experiência pessoal
+18:30 - Estratégias avançadas
+25:00 - Conclusão e próximos passos
+
+🔗 Links úteis mencionados no vídeo estão na bio/pinned!
+
+Se esse conteúdo te ajudou de alguma forma, deixa o LIKE 👍, compartilha com quem precisa, comenta sua dúvida ou experiência abaixo e SE INSCREVE com sininho pra não perder os próximos vídeos!
+
+#${tema.replace(/\s+/g, '')} #${tema.replace(/\s+/g, '')}2026 #Dicas${tema.replace(/\s+/g, '')} #Tutorial${tema.replace(/\s+/g, '')} #YouTubeBrasil #ConteudoViral #Motivacao #Sucesso #Trending`;
+                    break;
+
+                case 'Hashtags':
+                    const base = tema.toLowerCase().replace(/\s+/g, '');
+                    output = `<strong>Pacote completo de 50 hashtags otimizadas:</strong><br><br>
+#${base.charAt(0).toUpperCase() + base.slice(1)} #${base}2026 #${base}Brasil #Dicas${base.charAt(0).toUpperCase() + base.slice(1)} 
+#Tutorial${base} #${base}Tutorial #${base}Dicas #${base}Motivacao #${base}Viral 
+#${base}Inspiracao #${base}Sucesso #${base}Tips #${base}Guide #${base}Life 
+#YouTubeBrasil #ConteudoDigital #CriadoresDeConteudo #Trending #Viral2026 
+#MotivacaoDiaria #Inspiracao #SucessoOnline #Empreendedorismo #CrescimentoPessoal 
+#Produtividade #DesenvolvimentoPessoal #Mindset #Lifestyle #Brasil 
+#${base}Challenge #${base}Trend #${base}Live #${base}Community #${base}Pro 
+(repetir variações e combinar para máximo alcance)`;
+                    break;
+
+                case 'Ideias Thumbnail':
+                    output = `<strong>25 ideias detalhadas para thumbnails matadoras:</strong><ul>
+                        <li>Sua foto com expressão de choque total + texto gigante "${tema.toUpperCase()} MUDOU TUDO!" + seta vermelha enorme</li>
+                        <li>Antes/Depois dramático com transformação visível relacionada a ${tema}</li>
+                        <li>Número gigante "10 SEGREDOS" + emoji 🔥🔥 + fundo neon explosivo</li>
+                        <li>Texto "O QUE ACONTECE SE VOCÊ..." com imagem impactante de ${tema}</li>
+                        <li>Sua cara reagindo + emoji 😱 + borda vermelha pulsante</li>
+                        <li>Colagem de elementos relacionados a ${tema} com filtro dramático</li>
+                        <li>Texto "NUNCA FAÇA ISSO COM ${tema}" em fonte bold vermelha</li>
+                        <li>Imagem split screen comparando errado x certo</li>
+                        <li>Fundo gradiente neon + texto dourado "O SEGREDO DOS PROS"</li>
+                        <li>Elementos explodindo + contador "24 HORAS COM ${tema}"</li>
+                    </ul><p>E mais 15 variações semelhantes – teste todas para máximo CTR!</p>`;
+                    break;
+
+                case 'Letras de música':
+                    output = `<pre>Letra completa de música original sobre "${tema}":
+
+[Intro]
+(Instru instrumental suave)
+
+[Verso 1]
+Vivendo dia após dia, perdido em pensamentos
+Procurando algo maior, algo que me faça sentir
+Até que encontrei ${tema}, mudou minha direção
+Agora vejo o mundo com outra visão
+
+[Pré-Refrão]
+Sinto o coração acelerar, não dá pra parar
+Cada momento é intenso, quero mais e mais
+
+[Refrão]
+${tema.toUpperCase()}! É o que me faz viver
+${tema.toUpperCase()}! Nada vai me deter
+${tema.toUpperCase()}! Pra sempre vou lutar
+${tema.toUpperCase()}! É meu lugar
+
+[Verso 2]
+As noites eram frias, os dias sem cor
+Mas com ${tema} tudo mudou, encontrei o amor
+Pelas ruas correndo, sonhando acordado
+Nada me segura, estou transformado
+
+[Pré-Refrão]
+A energia explode, não tem como explicar
+
+[Refrão Final]
+${tema.toUpperCase()}! (mais intenso, com backing vocals)
+${tema.toUpperCase()}! Ecoando no peito
+${tema.toUpperCase()}! Pra sempre em movimento
+
+[Outro]
+(Fade out instrumental com eco de "${tema}")</pre>`;
+                    break;
+
+                case 'Gerador de nomes':
+                    const prefixos = ["Neo", "Vibe", "Pro", "Ultra", "Daily", "Hub", "Lab", "Zone", "Max", "Elite", "Turbo", "Alpha", "Prime", "King", "Queen", "Master", "Legend", "Star", "Power", "Dream"];
+                    const sufixos = ["Criativo", "World", "Vibes", "Studio", "Channel", "Life", "Tips", "Brasil", "Official", "Hub", "Zone", "Pro", "Academy", "Network", "Community", "Experience", "Journey", "Universe", "Empire", "Revolution"];
+                    output = '<strong>50 nomes épicos sugeridos para canal/perfil sobre ' + tema + ':</strong><ul>';
+                    for (let i = 0; i < 50; i++) {
+                        output += `<li>${randomChoice(prefixos)}${tema.charAt(0).toUpperCase() + tema.slice(1)}${randomChoice(sufixos)}</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Gerador de bio':
+                    output = `Bio completa e profissional sugerida:\n\n"🚀 Criador de conteúdo apaixonado por ${tema} | Dicas diárias avançadas, tutoriais completos, histórias reais e muita motivação 💡 | Transformando vidas através do conhecimento | Colabs e parcerias: DM 📩 | Novo vídeo toda semana ↓\n\n📈 +10k seguidores | 🇧🇷 Brasil | Link para curso/ebook na bio"`;
+                    break;
+
+                case 'Paleta de Cores':
+                    output = `<strong>Paleta profissional de 12 cores perfeitas para ${tema}:</strong><div style="display:flex; flex-wrap:wrap; justify-content:center; margin-top:40px;">`;
+                    for (let i = 0; i < 12; i++) {
+                        let color = randomColor();
+                        output += `<div class="color-swatch" style="background:${color};">${color.toUpperCase()}<br>Principal</div>`;
+                    }
+                    output += `</div><p>Use as 3 primeiras como principais, as próximas como secundárias e as últimas para destaques!</p>`;
+                    break;
+
+                case 'Gerador de Quotes':
+                    const quoteTemplates = [
+                        `"A verdadeira transformação começa quando você abraça ${tema} com toda a força do seu coração e mente."`,
+                        `"${tema} não é apenas uma escolha, é um estilo de vida que define quem você realmente é."`,
+                        `"Nunca subestime o poder silencioso de ${tema} em mudar destinos inteiros."`,
+                        `"Os maiores sucessos do mundo nasceram de uma paixão incontrolável por ${tema}."`,
+                        `"Em um mundo cheio de distrações, ${tema} é o caminho para a verdadeira liberdade."`,
+                        `"Todo dia é uma nova oportunidade de crescer com ${tema}."`,
+                        `"${tema} é a chave que abre portas que você nem sabia que existiam."`
+                    ];
+                    output = '<strong>30 quotes profundas e motivacionais sobre ' + tema + ':</strong><ul>';
+                    for (let i = 0; i < 30; i++) {
+                        output += `<li style="font-style:italic; font-size:1.3em; margin:15px 0;">${randomChoice(quoteTemplates)}</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Ideias para Reels':
+                    const reelIdeas = [
+                        "Transição rápida antes/depois com texto impactante sobre", "Dublagem de áudio viral com atuação relacionada a",
+                        "Tutorial de 15 segundos com texto na tela sobre", "Reação engraçada a comentários sobre",
+                        "Desafio trending com elementos de", "POV (ponto de vista) imersivo de alguém vivendo",
+                        "Time-lapse completo de processo criativo de", "Top 5 dicas rápidas com música energética sobre",
+                        "Dueto com vídeo famoso relacionado a", "Efeito especial com texto motivacional sobre"
+                    ];
+                    output = `<strong>50 ideias explosivas para Reels sobre ${tema}:</strong><ul>`;
+                    for (let i = 0; i < 50; i++) {
+                        output += `<li>${i+1}. ${randomChoice(reelIdeas)} ${tema}</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Ideias para Instagram':
+                    const igIdeas = [
+                        "Carrossel educativo com 10 slides sobre", "Foto estética com quote profunda sobre",
+                        "Stories interativos com enquetes sobre", "Post motivacional com imagem impactante de",
+                        "Reels dançando/trending com tema", "Colagem de fotos antes/depois de", "Infográfico completo sobre"
+                    ];
+                    output = `<strong>40 ideias completas para feed Instagram sobre ${tema}:</strong><ul>`;
+                    for (let i = 0; i < 40; i++) {
+                        output += `<li>${randomChoice(igIdeas)} ${tema} com legendas otimizadas e hashtags</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Captions Instagram':
+                    const captionTemplates = [
+                        `Quando ${tema} entra na sua vida, tudo muda 🌟\n\nQual sua experiência com isso? Comenta abaixo 👇\n\n#${tema.replace(/\s+/g, '')} #Motivacao`,
+                        `Dia de transformar sonhos em realidade com ${tema} 💪\n\nSalva esse post pra lembrar depois!\n\n#Inspiracao #Sucesso`
+                    ];
+                    output = `<strong>25 captions prontas e engajadoras para Instagram sobre ${tema}:</strong><ul>`;
+                    for (let i = 0; i < 25; i++) {
+                        output += `<li style="white-space:pre-wrap;">${randomChoice(captionTemplates)}</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                case 'Ideias TikTok':
+                    output = `<strong>60 ideias específicas para vídeos TikTok virais sobre ${tema}:</strong><ul>
+                        <li>Trend de transição com roupa/makeup relacionada a ${tema}</li>
+                        <li>Storytime completo em partes sobre experiência com ${tema}</li>
+                        <li>Dueto reagindo a vídeos famosos de ${tema}</li>
+                        <li>Tutorial rápido com texto na tela</li>
+                        <li>GRWM (Get Ready With Me) falando sobre ${tema}</li>
+                        <li>Challenge criado por você envolvendo ${tema}</li>
+                        <li>POV de situações reais com ${tema}</li>
+                        <li>Top 10 rápido com contagem regressiva</li>
+                    </ul><p>E mais 50 variações – use músicas trending!</p>`;
+                    break;
+
+                case 'Gerador de Histórias':
+                    output = `<pre>História curta completa e envolvente sobre "${tema}":
+
+Era uma vez uma pessoa comum que vivia uma vida previsível. Tudo mudou quando descobriu ${tema}.
+
+No início, havia dúvida e medo do desconhecido. Mas com o primeiro passo, veio a primeira vitória pequena que alimentou a motivação.
+
+Dia após dia, enfrentando desafios, aprendendo com erros, crescendo a cada obstáculo superado.
+
+Meses depois, olhando para trás, mal reconhecia a pessoa que era antes. ${tema} havia transformado não só hábitos, mas toda a visão de mundo.
+
+E assim, a jornada continua... porque com ${tema}, não existe linha de chegada, apenas evolução constante.
+
+Fim.
+
+(Moral: Comece hoje. O amanhã agradece.)</pre>`;
+                    break;
+
+                case 'Gerador de Memes':
+                    const memeFormats = ["Distracted Boyfriend", "Drake Hotline", "Success Kid", "This is Fine", "Expanding Brain", "Change My Mind", "SpongeBob Mocking", "Woman Yelling at Cat"];
+                    output = `<strong>30 ideias de textos para memes virais sobre ${tema}:</strong><ul>`;
+                    for (let i = 0; i < 30; i++) {
+                        output += `<li>Meme "${randomChoice(memeFormats)}": Texto 1 = "Pessoas sem ${tema}" | Texto 2 = "Eu com ${tema} todos os dias"</li>`;
+                    }
+                    output += '</ul>';
+                    break;
+
+                default:
+                    output = '<p>Mais ferramentas incríveis chegando em breve! Este portal está sempre crescendo 🚀</p>';
+            }
+
+            if (outputElem) outputElem.innerHTML = output;
+        }
+
+        // Jogos
+        function playRPS(choice) {
+            const choices = ['pedra', 'papel', 'tesoura'];
+            const computer = randomChoice(choices);
+            let result = '';
+            if (choice === computer) result = 'Empate total! 🤝';
+            else if (
+                (choice === 'pedra' && computer === 'tesoura') ||
+                (choice === 'papel' && computer === 'pedra') ||
+                (choice === 'tesoura' && computer === 'papel')
+            ) result = 'Você ESMAGOU o computador! 🎉';
+            else result = 'Computador venceu dessa vez! 😎';
+
+            document.getElementById('rpsResult').innerHTML = `
+                <p>Você escolheu: ${choice === 'pedra' ? '✊' : choice === 'papel' ? '✋' : '✂️'}</p>
+                <p>Computador: ${computer === 'pedra' ? '✊' : computer === 'papel' ? '✋' : '✂️'}</p>
+                <p style="font-size:2em; margin:20px 0;"><strong>${result}</strong></p>
+                <button onclick="showSection('Pedra Papel Tesoura')">Jogar Novamente</button>
+            `;
+        }
+
+        function playerMove(index) {
+            if (tttBoard[index] !== '' || document.getElementById('tttResult').innerHTML !== '') return;
+            tttBoard[index] = 'X';
+            document.getElementById(`cell${index}`).textContent = '❌';
+            if (checkTTTWinner()) return;
+            setTimeout(computerTTTMove, 800);
+        }
+
+        function computerTTTMove() {
+            let available = tttBoard.map((v, i) => v === '' ? i : null).filter(v => v !== null);
+            if (available.length === 0) return;
+            let move = randomChoice(available);
+            tttBoard[move] = 'O';
+            document.getElementById(`cell${move}`).textContent = '⭕';
+            checkTTTWinner();
+        }
+
+        function checkTTTWinner() {
+            const lines = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+            for (let line of lines) {
+                if (tttBoard[line[0]] && tttBoard[line[0]] === tttBoard[line[1]] && tttBoard[line[0]] === tttBoard[line[2]]) {
+                    let winner = tttBoard[line[0]] === 'X' ? 'VOCÊ' : 'COMPUTADOR';
+                    document.getElementById('tttResult').innerHTML = `<strong>${winner} VENCEU!!! 🎉</strong>`;
+                    disableTTTCells();
+                    return true;
+                }
+            }
+            if (tttBoard.every(v => v !== '')) {
+                document.getElementById('tttResult').innerHTML = '<strong>EMPATE TOTAL!</strong>';
+                return true;
+            }
+            return false;
+        }
+
+        function disableTTTCells() {
+            for (let i = 0; i < 9; i++) document.getElementById(`cell${i}`).onclick = null;
+        }
+
+        function resetTTT() {
+            tttBoard = Array(9).fill('');
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(`cell${i}`).textContent = '';
+                document.getElementById(`cell${i}`).onclick = () => playerMove(i);
+            }
+            document.getElementById('tttResult').textContent = '';
+        }
+
+        function guessNumber() {
+            let guess = parseInt(document.getElementById('guessInput').value);
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                alert('Digite um número válido entre 1 e 100!');
+                return;
+            }
+            guessAttempts++;
+            let msg = '';
+            if (guess < secretNumber) msg = 'Muito baixo! Tente mais alto 📈';
+            else if (guess > secretNumber) msg = 'Muito alto! Tente mais baixo 📉';
+            else msg = `PARABÉNS! Acertou em apenas ${guessAttempts} tentativas! 🎉`;
+
+            document.getElementById('guessResult').innerHTML += `<p><strong>Tentativa ${guessAttempts}:</strong> ${guess} → ${msg}</p>`;
+            document.getElementById('guessInput').value = '';
+            if (guess === secretNumber) {
+                document.querySelector('#area button').disabled = true;
+            }
+        }
+
+        function newGuessGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            guessAttempts = 0;
+            document.getElementById('guessResult').innerHTML = '';
+            document.querySelector('#area button').disabled = false;
+        }
+
+        function getHangmanDisplay() {
+            return hangmanWord.split('').map(letter => hangmanGuessed.includes(letter) ? letter : '_').join(' ');
+        }
+
+        function updateHangmanDisplay() {
+            document.getElementById('hangmanWord').textContent = getHangmanDisplay();
+            document.getElementById('wrongLetters').textContent = [...new Set(hangmanWord.split('').filter(l => !hangmanGuessed.includes(l)))].join(' ');
+            document.getElementById('attemptsLeft').textContent = 6 - hangmanWrong;
+        }
+
+        function guessLetter() {
+            let letter = document.getElementById('letterInput').value.toUpperCase();
+            if (!letter || letter.length !== 1 || !/[A-Z]/.test(letter)) {
+                alert('Digite uma letra válida!');
+                return;
+            }
+            if (hangmanGuessed.includes(letter) || hangmanWord.split('').filter(l => !hangmanGuessed.includes(l)).includes(letter)) {
+                alert('Você já tentou essa letra!');
+                return;
+            }
+            if (hangmanWord.includes(letter)) {
+                hangmanGuessed.push(letter);
+            } else {
+                hangmanWrong++;
+            }
+            document.getElementById('letterInput').value = '';
+            updateHangmanDisplay();
+
+            if (hangmanWord.split('').every(l => hangmanGuessed.includes(l))) {
+                document.getElementById('hangmanResult').innerHTML = `<strong>Você VENCEU! A palavra era: ${hangmanWord}</strong>`;
+            } else if (hangmanWrong >= 6) {
+                document.getElementById('hangmanResult').innerHTML = `<strong>Game Over! A palavra era: ${hangmanWord}</strong>`;
+            }
+        }
+
+        function specialAction() {
+            const url = document.getElementById("inputSpecial").value.trim();
+            if (!url) {
+                alert("Insira uma URL válida do YouTube!");
+                return;
+            }
+            const videoId = extractYouTubeID(url);
+            if (videoId) {
+                window.open(`https://www.y2mate.com/youtube/${videoId}`);
+            } else {
+                alert("URL do YouTube inválida!");
+            }
+        }
+
+        // Sistema de login + tema
+        document.addEventListener("DOMContentLoaded", () => {
+            let theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = theme === 'light' ? '🌙' : '☀️';
+                themeToggle.onclick = () => {
+                    document.body.classList.toggle('light-mode');
+                    let newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+                    localStorage.setItem('theme', newTheme);
+                    themeToggle.innerHTML = newTheme === 'light' ? '🌙' : '☀️';
+                };
+            }
+
+            const loginBox = document.getElementById("loginBox");
+            const registerBox = document.getElementById("registerBox");
+            const portal = document.getElementById("portal");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            const loginUser = document.getElementById("loginUser");
+            const loginPass = document.getElementById("loginPass");
+            const loginMsg = document.getElementById("loginMsg");
+
+            const regUser = document.getElementById("regUser");
+            const regPass = document.getElementById("regPass");
+            const regMsg = document.getElementById("regMsg");
+
+            const userName = document.getElementById("userName");
+
+            let users = JSON.parse(localStorage.getItem("users")) || {};
+            let session = localStorage.getItem("session");
+
+            if (session && users[session]) openPortal(session);
+
+            document.getElementById("loginBtn").onclick = login;
+            document.getElementById("registerBtn").onclick = register;
+
+            document.getElementById("goRegister").onclick = (e) => {
+                e.preventDefault();
+                loginBox.classList.add("hidden");
+                registerBox.classList.remove("hidden");
+                loginMsg.textContent = "";
+            };
+
+            document.getElementById("goLogin").onclick = (e) => {
+                e.preventDefault();
+                registerBox.classList.add("hidden");
+                loginBox.classList.remove("hidden");
+                regMsg.textContent = "";
+            };
+
+            logoutBtn.onclick = () => {
+                localStorage.removeItem("session");
+                location.reload();
+            };
+
+            function register() {
+                if (regUser.value.length < 3 || regPass.value.length < 3) {
+                    regMsg.textContent = "Mínimo 3 caracteres";
+                    return;
+                }
+                if (users[regUser.value]) {
+                    regMsg.textContent = "Usuário já existe";
+                    return;
+                }
+                users[regUser.value] = regPass.value;
+                localStorage.setItem("users", JSON.stringify(users));
+                regMsg.textContent = "Conta criada com sucesso! Faça login.";
+                regMsg.style.color = "#00e5ff";
+            }
+
+            function login() {
+                if (users[loginUser.value] === loginPass.value) {
+                    localStorage.setItem("session", loginUser.value);
+                    openPortal(loginUser.value);
+                } else {
+                    loginMsg.textContent = "Usuário ou senha inválidos";
+                }
+            }
+
+            function openPortal(user) {
+                loginBox.classList.add("hidden");
+                registerBox.classList.add("hidden");
+                portal.classList.remove("hidden");
+                userName.textContent = user;
+                logoutBtn.style.display = "block";
+                themeToggle.style.display = "block";
+            }
+        });
+    </script>
 </body>
 
 </html>
